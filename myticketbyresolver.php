@@ -2,8 +2,8 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $user = $users->userdata($_SESSION['loginid']);
-$tickets 		= $tickets->get_tickets_by_resolver($user['username']);
-$tickets_count 	= count($tickets);
+$tickets = $tickets->get_tickets_by_resolver($user['username']);
+$tickets_count = count($tickets);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -51,20 +51,20 @@ $tickets_count 	= count($tickets);
     </thead>
     <tbody>
 		<?php 
-		foreach ($tickets as $ticket) {
-			$sla = $slas->sla_data($ticket['sla']);
-			$customer = $customers->customer_data($ticket['idcustomer']);
-			$user = $users->userdata($ticket['assignee']);
-			echo '<tr><td><a href=ticketedit.php?id='.$ticket['id']. '>'.$ticket['ticketnumber'].'</a></td>'.
-				 '<td>'.$sla['namasla'].'</td>'.
-				 '<td>'.$customer['namacustomer'].'</td>'.
-				 '<td>'.date('d-M-Y',$ticket['reporteddate']).'</td>'.
-				 '<td>'.$ticket['reportedby'].'</td>'.
-				 '<td>'.$ticket['problemsummary'].'</td>'.
-				 '<td>'.$ticket['ticketstatus'].'</td>'.
-				 '<td>'.$user['fullname'].'</td></tr>';
-		}
-		?>
+        foreach ($tickets as $ticket) {
+            $sla = $slas->sla_data($ticket['sla']);
+            $customer = $customers->customer_data($ticket['idcustomer']);
+            $user = $users->userdata($ticket['assignee']);
+            echo '<tr><td><a href=ticketedit.php?id='.$ticket['id'].'>'.$ticket['ticketnumber'].'</a></td>'.
+                 '<td>'.$sla['namasla'].'</td>'.
+                 '<td>'.$customer['namacustomer'].'</td>'.
+                 '<td>'.date('d-M-Y', $ticket['reporteddate']).'</td>'.
+                 '<td>'.$ticket['reportedby'].'</td>'.
+                 '<td>'.$ticket['problemsummary'].'</td>'.
+                 '<td>'.$ticket['ticketstatus'].'</td>'.
+                 '<td>'.$user['fullname'].'</td></tr>';
+        }
+        ?>
     </tbody>
 	</table>
 	<p>&nbsp;</p>

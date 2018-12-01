@@ -2,11 +2,12 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $user = $users->userdata($_SESSION['loginid']);
-if($user['level'] != "Admin")
-{ 	exit("You don't have permission to access this page!"); }
+if ($user['level'] != 'Admin') {
+    exit("You don't have permission to access this page!");
+}
 
-$members 		= $customers->get_customers();
-$member_count 	= count($members);
+$members = $customers->get_customers();
+$member_count = count($members);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -61,22 +62,23 @@ $member_count 	= count($members);
     </thead>
     <tbody>
 		<?php 
-		foreach ($members as $member)
-		{	if (@$member['confirmed']=='1')
-			{$locked='No';}
-			else
-			{$locked='Yes';}
-			$disp_id_customer=sprintf("%04s", $member['idcustomer']);
-			echo '<tr><td><a href=customeredit.php?id='.$member['idcustomer']. '>'.$disp_id_customer.'</a></td>'.
-				 '<td>'.$member['namacustomer'].'</td>'.
-				 '<td>'.$member['alamat'].'</td>'.
-				 '<td>'.$member['Telp'].'</td>'.
-				 '<td>'.$member['PIC'].'</td>'.
-				 '<td>'.$member['selesperson'].'</td>'.
-				 '<td>'.$member['customerproduct'].'</td>'.
-				 '<td><a href=customerdel.php?id='.$member['idcustomer']. ' onclick="return delete_confirm();">del</a></td></tr>';
-		}
-		?>
+        foreach ($members as $member) {
+            if (@$member['confirmed'] == '1') {
+                $locked = 'No';
+            } else {
+                $locked = 'Yes';
+            }
+            $disp_id_customer = sprintf('%04s', $member['idcustomer']);
+            echo '<tr><td><a href=customeredit.php?id='.$member['idcustomer'].'>'.$disp_id_customer.'</a></td>'.
+                 '<td>'.$member['namacustomer'].'</td>'.
+                 '<td>'.$member['alamat'].'</td>'.
+                 '<td>'.$member['Telp'].'</td>'.
+                 '<td>'.$member['PIC'].'</td>'.
+                 '<td>'.$member['selesperson'].'</td>'.
+                 '<td>'.$member['customerproduct'].'</td>'.
+                 '<td><a href=customerdel.php?id='.$member['idcustomer'].' onclick="return delete_confirm();">del</a></td></tr>';
+        }
+        ?>
     </tbody>
 	</table>
 	<p>&nbsp;</p>

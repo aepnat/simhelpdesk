@@ -2,10 +2,11 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $user = $users->userdata($_SESSION['loginid']);
-if($user['level'] != "Admin")
-{ 	exit("You don't have permission to access this page!"); }
-$members 		= $users->get_users();
-$member_count 	= count($members);
+if ($user['level'] != 'Admin') {
+    exit("You don't have permission to access this page!");
+}
+$members = $users->get_users();
+$member_count = count($members);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -60,21 +61,22 @@ $member_count 	= count($members);
     </thead>
     <tbody>
 		<?php 
-		foreach ($members as $member) {
-			if ($member['confirmed']=='1')
-			{$locked='No';}
-			else
-			{$locked='Yes';}
-			echo '<tr><td><a href=useredit.php?id='.$member['id']. '>'.$member['username'].'</a></td>'.
-				 '<td>'.$member['level'].'</td>'.
-				 '<td>'.$member['fullname'].'</td>'.
-				 '<td>'.$member['email'].'</td>'.
-				 '<td>'.$member['Telp'].'</td>'.
-				 '<td>'.date('d-M-Y H:i', $member['time']).'</td>'.
-				 '<td>'.$locked.'</td>'.
-				 '<td><a href=userdel.php?id='.$member['id']. ' onclick="return delete_confirm();">del</a></td></tr>';
-		}
-		?>
+        foreach ($members as $member) {
+            if ($member['confirmed'] == '1') {
+                $locked = 'No';
+            } else {
+                $locked = 'Yes';
+            }
+            echo '<tr><td><a href=useredit.php?id='.$member['id'].'>'.$member['username'].'</a></td>'.
+                 '<td>'.$member['level'].'</td>'.
+                 '<td>'.$member['fullname'].'</td>'.
+                 '<td>'.$member['email'].'</td>'.
+                 '<td>'.$member['Telp'].'</td>'.
+                 '<td>'.date('d-M-Y H:i', $member['time']).'</td>'.
+                 '<td>'.$locked.'</td>'.
+                 '<td><a href=userdel.php?id='.$member['id'].' onclick="return delete_confirm();">del</a></td></tr>';
+        }
+        ?>
     </tbody>
 	</table>
 	<p>&nbsp;</p>

@@ -1,19 +1,19 @@
 <?php 
 require 'core/init.php';
 $general->logged_out_protect();
-$id=$_GET['id'];
-$thenews=$hdnews->news_data($id);
-if (isset($_POST['submit']))
-{	$newsdate 	= strtotime($_POST['newsdate']);
-	$title 		= $_POST['title'];
-	$detail 	= $_POST['detail'];
-	$user 		= $users->userdata($_SESSION['loginid']);
-	$createdby 	= ucwords(strtolower($user['fullname']));
-	$createdon 	= strtotime(now);
-	$expired 	= strtotime($_POST['expireddate']);
-	
-	$hdnews->update_news($id,$newsdate,$title,$detail,$createdby,$createdon,$expired);
-	header('Location: hdnews.php');
+$id = $_GET['id'];
+$thenews = $hdnews->news_data($id);
+if (isset($_POST['submit'])) {
+    $newsdate = strtotime($_POST['newsdate']);
+    $title = $_POST['title'];
+    $detail = $_POST['detail'];
+    $user = $users->userdata($_SESSION['loginid']);
+    $createdby = ucwords(strtolower($user['fullname']));
+    $createdon = strtotime(now);
+    $expired = strtotime($_POST['expireddate']);
+
+    $hdnews->update_news($id, $newsdate, $title, $detail, $createdby, $createdon, $expired);
+    header('Location: hdnews.php');
 }
 ?>
 <!DOCTYPE HTML>
@@ -62,7 +62,7 @@ if (isset($_POST['submit']))
 	<table class="formtable">
 		<tr align="left">
 			<td> News Date </td><td> : </td>
-			<td><input type="text" id="newsdate" name="newsdate" readonly="readonly" value="<?php echo date('d-M-Y',$thenews['newsdate']); ?>">
+			<td><input type="text" id="newsdate" name="newsdate" readonly="readonly" value="<?php echo date('d-M-Y', $thenews['newsdate']); ?>">
 			</td>
 		</tr>
 		<tr align="left">
@@ -75,7 +75,7 @@ if (isset($_POST['submit']))
 		</tr>
 		<tr align="left">
 			<td> News Expired Date</td><td> : </td>
-			<td><input type="text" id="expireddate" name="expireddate" readonly="readonly" value="<?php echo date('d-M-Y',$thenews['expired']); ?>">
+			<td><input type="text" id="expireddate" name="expireddate" readonly="readonly" value="<?php echo date('d-M-Y', $thenews['expired']); ?>">
 			</td>
 		</tr>
 		<tr align="left">
@@ -91,9 +91,9 @@ if (isset($_POST['submit']))
 	</form>
 
 	<?php 
-	if(empty($errors) === false){
-		echo '<p class=errormsg>' . implode('</p><p class=errormsg>', $errors) . '</p>';
-	}
-	?>
+    if (empty($errors) === false) {
+        echo '<p class=errormsg>'.implode('</p><p class=errormsg>', $errors).'</p>';
+    }
+    ?>
 </body>
 </html>

@@ -1,19 +1,19 @@
 <?php 
 require 'core/init.php';
 $general->logged_out_protect();
-$id_cust=$_GET['id'];
-$member=$customers->customer_data($id_cust);
-if (isset($_POST['submit']))
-{	$namacustomer 	= $_POST['namacustomer'];
-	$password 		= $_POST['password'];
-	$alamat 		= $_POST['alamat'];
-	$Telp 			= $_POST['telp'];
-	$email 			= $_POST['email'];
-	$PIC 			= $_POST['PIC'];
-	$selesperson 	= $_POST['selesperson'];
-	$customerproduct= $_POST['customerproduct'];
-	$customers->update_customer($id_cust,$namacustomer,$alamat,$Telp,$email,$PIC,$selesperson,$customerproduct);
-	header('Location: customerlist.php');
+$id_cust = $_GET['id'];
+$member = $customers->customer_data($id_cust);
+if (isset($_POST['submit'])) {
+    $namacustomer = $_POST['namacustomer'];
+    $password = $_POST['password'];
+    $alamat = $_POST['alamat'];
+    $Telp = $_POST['telp'];
+    $email = $_POST['email'];
+    $PIC = $_POST['PIC'];
+    $selesperson = $_POST['selesperson'];
+    $customerproduct = $_POST['customerproduct'];
+    $customers->update_customer($id_cust, $namacustomer, $alamat, $Telp, $email, $PIC, $selesperson, $customerproduct);
+    header('Location: customerlist.php');
 }
 ?>
 <!DOCTYPE HTML>
@@ -125,9 +125,9 @@ if (isset($_POST['submit']))
 	</form>
 
 	<?php 
-	if(empty($errors) === false){
-		echo '<p class=errormsg>' . implode('</p><p class=errormsg>', $errors) . '</p>';
-	}
-	?>
+    if (empty($errors) === false) {
+        echo '<p class=errormsg>'.implode('</p><p class=errormsg>', $errors).'</p>';
+    }
+    ?>
 </body>
 </html>

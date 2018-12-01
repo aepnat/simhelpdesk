@@ -3,18 +3,19 @@ date_default_timezone_set('Asia/Jakarta');
 require 'core/init.php';
 $general->logged_out_protect();
 $user = $users->userdata($_SESSION['loginid']);
-if($user['level'] != "Admin")
-{ 	exit("You don't have permission to access this page!"); }
-
-if (isset($_POST['submit']))
-{	echo 'Sending email queue... Please wait!';
-	//$result=$emails->send_new_ticket();
-	//$result=$emails->send_sla_remainder();
-	//header('Location: emailqueue.php?process');	
-	//sleep(5);
-	header('Location: emailqueue.php?success');	
+if ($user['level'] != 'Admin') {
+    exit("You don't have permission to access this page!");
 }
-$logs 			  = $emails->get_email_queue();
+
+if (isset($_POST['submit'])) {
+    echo 'Sending email queue... Please wait!';
+    //$result=$emails->send_new_ticket();
+    //$result=$emails->send_sla_remainder();
+    //header('Location: emailqueue.php?process');
+    //sleep(5);
+    header('Location: emailqueue.php?success');
+}
+$logs = $emails->get_email_queue();
 $emailqueue_count = count($logs);
 ?>
 <!DOCTYPE HTML>
@@ -59,11 +60,13 @@ $emailqueue_count = count($logs);
 	</form>
 	<span class="textmsg">
 	<?php 
-		if (isset($_GET['process']) && empty($_GET['process']))
-		{echo 'Sending email queue... Please wait!';}
-		if (isset($_GET['success']) && empty($_GET['success']))
-		{echo 'Sending email queue is done!';}
-	?></span>
+        if (isset($_GET['process']) && empty($_GET['process'])) {
+            echo 'Sending email queue... Please wait!';
+        }
+        if (isset($_GET['success']) && empty($_GET['success'])) {
+            echo 'Sending email queue is done!';
+        }
+    ?></span>
 	</p>
 	<table id="datatables" class="display">
     <thead>
@@ -77,15 +80,15 @@ $emailqueue_count = count($logs);
     </thead>
     <tbody>
 		<?php 
-		foreach ($logs as $log)
-		{	$idemail = $log['idemail'];
-			echo '<tr><td><a href="emailsend.php?id='.$idemail.'">'.date('d-M-Y H:i', $log['senddate']).'</a></td>'.
-				 '<td>'.$log['emailto'].'</td>'.
-				 '<td>'.$log['emailcc'].'</td>'.
-				 '<td>'.$log['emailsubject'].'</td>'.
-				 '<td>'.$log['emailstatus'].'</td></tr>';
-		}
-		?>
+        foreach ($logs as $log) {
+            $idemail = $log['idemail'];
+            echo '<tr><td><a href="emailsend.php?id='.$idemail.'">'.date('d-M-Y H:i', $log['senddate']).'</a></td>'.
+                 '<td>'.$log['emailto'].'</td>'.
+                 '<td>'.$log['emailcc'].'</td>'.
+                 '<td>'.$log['emailsubject'].'</td>'.
+                 '<td>'.$log['emailstatus'].'</td></tr>';
+        }
+        ?>
     </tbody>
 	</table>
 </body>

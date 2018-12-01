@@ -2,12 +2,12 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $user = $users->userdata($_SESSION['loginid']);
-$ticket1 			= $tickets->get_tickets_by_requester($_SESSION['loginid']);
-$tickets_requested 	= count($ticket1);
-$ticket2 			= $tickets->get_tickets_by_assignee($_SESSION['loginid']);
-$tickets_assigned 	= count($ticket2);
-$ticket3 			= $tickets->get_tickets_by_resolver($user['username']);
-$tickets_resolved 	= count($ticket3);
+$ticket1 = $tickets->get_tickets_by_requester($_SESSION['loginid']);
+$tickets_requested = count($ticket1);
+$ticket2 = $tickets->get_tickets_by_assignee($_SESSION['loginid']);
+$tickets_assigned = count($ticket2);
+$ticket3 = $tickets->get_tickets_by_resolver($user['username']);
+$tickets_resolved = count($ticket3);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -28,10 +28,10 @@ $tickets_resolved 	= count($ticket3);
 		<td><h1 class="content">Welcome to Helpdesk System</h1>
 		<ul>
 		<?php
-		echo "<li><p>Currently you have requested: $tickets_requested tickets. </p></li>";
-		echo "<li><p>Number of ticket that assigned to you: $tickets_assigned tickets.</p></li> ";
-		echo "<li><p>You have resolved $tickets_resolved tickets.</p></li>";
-		?>
+        echo "<li><p>Currently you have requested: $tickets_requested tickets. </p></li>";
+        echo "<li><p>Number of ticket that assigned to you: $tickets_assigned tickets.</p></li> ";
+        echo "<li><p>You have resolved $tickets_resolved tickets.</p></li>";
+        ?>
 		</ol><br/>
 		</td>
 	</tr>
@@ -43,12 +43,12 @@ $tickets_resolved 	= count($ticket3);
 	</thead>
 	<tbody>
 	<?php 
-		$news = $hdnews->get_headline_news();
-		foreach ($news as $thenews)
-		{	echo '<tr><td>'.date('d-M-Y',$thenews['newsdate']).'</td>'.
-				 '<td><a href=hdnewsread.php?id='.$thenews['id']. '>'.$thenews['title'].'</a></td></tr>';
-		}
-	?>
+        $news = $hdnews->get_headline_news();
+        foreach ($news as $thenews) {
+            echo '<tr><td>'.date('d-M-Y', $thenews['newsdate']).'</td>'.
+                 '<td><a href=hdnewsread.php?id='.$thenews['id'].'>'.$thenews['title'].'</a></td></tr>';
+        }
+    ?>
 	</tbody>
 	</table>
 	<p>&nbsp;</p>

@@ -2,9 +2,10 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $user = $users->userdata($_SESSION['loginid']);
-if($user['level'] != "Admin")
-{ 	exit("You don't have permission to access this page!"); }
-$news 		= $hdnews->get_news();
+if ($user['level'] != 'Admin') {
+    exit("You don't have permission to access this page!");
+}
+$news = $hdnews->get_news();
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -56,16 +57,15 @@ $news 		= $hdnews->get_news();
     </thead>
     <tbody>
 		<?php 
-		foreach ($news as $thenews)
-		{
-			echo '<td>'.date('d-M-Y',$thenews['newsdate']).'</td>'.
-				 '<td>'.'<a href=hdnewsedit.php?id='.$thenews['id']. '>'.$thenews['title'].'</td>'.
-				 '<td>'.$thenews['createdby'].'</td>'.
-				 '<td>'.date('d-M-Y',$thenews['createdon']).'</td>'.
-				 '<td>'.date('d-M-Y',$thenews['expired']).'</td>'.
-				 '<td><a href=hdnewsdel.php?id='.$thenews['id']. ' onclick="return delete_confirm();">del</a></td></tr>';
-		}
-		?>
+        foreach ($news as $thenews) {
+            echo '<td>'.date('d-M-Y', $thenews['newsdate']).'</td>'.
+                 '<td>'.'<a href=hdnewsedit.php?id='.$thenews['id'].'>'.$thenews['title'].'</td>'.
+                 '<td>'.$thenews['createdby'].'</td>'.
+                 '<td>'.date('d-M-Y', $thenews['createdon']).'</td>'.
+                 '<td>'.date('d-M-Y', $thenews['expired']).'</td>'.
+                 '<td><a href=hdnewsdel.php?id='.$thenews['id'].' onclick="return delete_confirm();">del</a></td></tr>';
+        }
+        ?>
     </tbody>
 	</table>
 	<p>&nbsp;</p>

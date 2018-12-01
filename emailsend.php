@@ -1,38 +1,38 @@
 <?php 
 require 'core/init.php';
 $general->logged_out_protect();
-@$idemail=$_GET['id'];
-$email 	= $emails->get_email_queue_by_id($idemail);
-if (isset($_POST['submit']))
-{	$emailstatus = $_POST['emailstatus'];
-	if($emailstatus=="Sent")
-	{	$errors[] = 'You have sent this email!';
-	}else
-	{	$to 	 = $_POST['emailto'];
-		$cc 	 = substr($_POST['emailcc'], 0, -2);
-		$subject = $_POST['emailsubject'];
-		$message = $_POST['message'];
-		
-		$headers   = array();
-		$headers[] = "MIME-Version: 1.0";
-		$headers[] = "Content-type: text/plain; charset=iso-8859-1";
-		$headers[] = "From: Helpdesk System <helpdesk@kampushendra.com>";
-		$headers[] = "Cc: $cc";
-		$headers[] = "Bcc:";
-		$headers[] = "Reply-To: Helpdesk System <helpdesk@kampushendra.com>";
-		$headers[] = "X-Mailer: PHP/".phpversion();
-		//echo $to."<br>".$cc."<br>".$subject."<br>".$message;
-		//echo $emailstatus;
-		
-		$ok = mail($to, $subject, $message, implode("\r\n", $headers));
-		if ($ok)
-		{	$emails->update_status_email($idemail,"Sent");
-			header('Location: emailsend.php?success');
-		} else {
-			$emails->update_status_email($idemail,"Cannot Send");
-			$errors[] = 'Sorry, email cannot send now! Please try again.';
-		}
-	}
+@$idemail = $_GET['id'];
+$email = $emails->get_email_queue_by_id($idemail);
+if (isset($_POST['submit'])) {
+    $emailstatus = $_POST['emailstatus'];
+    if ($emailstatus == 'Sent') {
+        $errors[] = 'You have sent this email!';
+    } else {
+        $to = $_POST['emailto'];
+        $cc = substr($_POST['emailcc'], 0, -2);
+        $subject = $_POST['emailsubject'];
+        $message = $_POST['message'];
+
+        $headers = [];
+        $headers[] = 'MIME-Version: 1.0';
+        $headers[] = 'Content-type: text/plain; charset=iso-8859-1';
+        $headers[] = 'From: Helpdesk System <helpdesk@kampushendra.com>';
+        $headers[] = "Cc: $cc";
+        $headers[] = 'Bcc:';
+        $headers[] = 'Reply-To: Helpdesk System <helpdesk@kampushendra.com>';
+        $headers[] = 'X-Mailer: PHP/'.phpversion();
+        //echo $to."<br>".$cc."<br>".$subject."<br>".$message;
+        //echo $emailstatus;
+
+        $ok = mail($to, $subject, $message, implode("\r\n", $headers));
+        if ($ok) {
+            $emails->update_status_email($idemail, 'Sent');
+            header('Location: emailsend.php?success');
+        } else {
+            $emails->update_status_email($idemail, 'Cannot Send');
+            $errors[] = 'Sorry, email cannot send now! Please try again.';
+        }
+    }
 }
 ?>
 <!DOCTYPE HTML>
@@ -83,12 +83,12 @@ if (isset($_POST['submit']))
 	</fieldset>
 	</form>
 	<?php 
-	if(empty($errors) === false){
-		echo '<p class=errormsg>' . implode('</p><p class=errormsg>', $errors) . '</p>';
-	}
-	if (isset($_GET['success']) && empty($_GET['success'])) {
-		echo 'Email has been sent!';
-	}
-	?>
+    if (empty($errors) === false) {
+        echo '<p class=errormsg>'.implode('</p><p class=errormsg>', $errors).'</p>';
+    }
+    if (isset($_GET['success']) && empty($_GET['success'])) {
+        echo 'Email has been sent!';
+    }
+    ?>
 </body>
 </html>

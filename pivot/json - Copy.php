@@ -1,4 +1,5 @@
 <?php
+
 echo '[
 {"Product": "Data", "Company": "Banyan Tree", "Warranty": 22, "Technical Support": "Liu, Laurin", "Status": "Closed"},
 {"Product": "Data", "Company": "GRAND INDONESIA", "Warranty": 43, "Technical Support": "Mourani, Maria", "Status": "Assigned"},

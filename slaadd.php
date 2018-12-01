@@ -2,21 +2,22 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $user = $users->userdata($_SESSION['loginid']);
-if($user['level'] != "Admin")
-{ 	exit("You don't have permission to access this page!"); }
+if ($user['level'] != 'Admin') {
+    exit("You don't have permission to access this page!");
+}
 
-if (isset($_POST['submit']))
-{	$slaid 			= $_POST['slaid'];
-	$namasla 		= $_POST['namasla'];
-	$responsetime 	= $_POST['responsetime'];
-	$resolutiontime = $_POST['resolutiontime'];
-	$slawarning		= $_POST['slawarning'];
-	if ($slas->sla_exists($slaid) === true) {
+if (isset($_POST['submit'])) {
+    $slaid = $_POST['slaid'];
+    $namasla = $_POST['namasla'];
+    $responsetime = $_POST['responsetime'];
+    $resolutiontime = $_POST['resolutiontime'];
+    $slawarning = $_POST['slawarning'];
+    if ($slas->sla_exists($slaid) === true) {
         $errors[] = 'SLA ID is already exists!';
     } else {
-		$slas->add_sla($slaid,$namasla,$responsetime,$resolutiontime,$slawarning);
-		header('location:slalist.php');
-	}
+        $slas->add_sla($slaid, $namasla, $responsetime, $resolutiontime, $slawarning);
+        header('location:slalist.php');
+    }
 }
 ?>
 <!DOCTYPE HTML>
@@ -99,9 +100,9 @@ if (isset($_POST['submit']))
 	</fieldset>
 	</form>
 	<?php 
-	if(empty($errors) === false){
-		echo '<p class=errormsg>' . implode('</p><p class=errormsg>', $errors) . '</p>';
-	}
-	?>
+    if (empty($errors) === false) {
+        echo '<p class=errormsg>'.implode('</p><p class=errormsg>', $errors).'</p>';
+    }
+    ?>
 </body>
 </html>

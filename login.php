@@ -2,29 +2,28 @@
 //error_reporting(0);
 require 'core/init.php';
 $general->logged_in_protect();
-if (empty($_POST) === false)
-{	$username = strip_tags(addslashes(trim($_POST['username']))); 
-	$password = strip_tags(addslashes(trim($_POST['password']))); 
-	if (empty($username) === true || empty($password) === true) {
-		$errors[] = 'Sorry, but we need your username and password.';
-	} else if ($users->user_exists($username) === false) {
-		$errors[] = 'Sorry, that username doesn\'t exists. Please try again.';
-	} 
-	else
-	{	$login = $users->login($username, $password);
-		if ($login === false) {
-			$errors[] = 'Sorry, that username/password is invalid. Please try again.';
-		}else if (!$users->email_confirmed($username)){
-			$errors[] = 'Sorry, your account is locked. Please contact Administrator.';
-		}else {
-			$_SESSION['loginid'] =  $login;
-			$users->log_users($login,'Login to Helpdesk System');
-			echo $login;
-			header('location: home.php');
-			exit();
-		}
-	}
-} 
+if (empty($_POST) === false) {
+    $username = strip_tags(addslashes(trim($_POST['username'])));
+    $password = strip_tags(addslashes(trim($_POST['password'])));
+    if (empty($username) === true || empty($password) === true) {
+        $errors[] = 'Sorry, but we need your username and password.';
+    } elseif ($users->user_exists($username) === false) {
+        $errors[] = 'Sorry, that username doesn\'t exists. Please try again.';
+    } else {
+        $login = $users->login($username, $password);
+        if ($login === false) {
+            $errors[] = 'Sorry, that username/password is invalid. Please try again.';
+        } elseif (!$users->email_confirmed($username)) {
+            $errors[] = 'Sorry, your account is locked. Please contact Administrator.';
+        } else {
+            $_SESSION['loginid'] = $login;
+            $users->log_users($login, 'Login to Helpdesk System');
+            echo $login;
+            header('location: home.php');
+            exit();
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,9 +56,9 @@ if (empty($_POST) === false)
 	</table>
 </div>
 <?php 
-	if(empty($errors) === false){
-		echo '<p class="errormsg">' . implode('</p><p class="errormsg">', $errors) . '</p>';	
-	}
+    if (empty($errors) === false) {
+        echo '<p class="errormsg">'.implode('</p><p class="errormsg">', $errors).'</p>';
+    }
 ?>
 <div class="footer">
 </div>

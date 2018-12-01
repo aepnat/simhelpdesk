@@ -2,9 +2,10 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $user = $users->userdata($_SESSION['loginid']);
-if($user['level'] != "Admin")
-{ 	exit("You don't have permission to access this page!"); }
-$sla 		= $slas->get_sla();
+if ($user['level'] != 'Admin') {
+    exit("You don't have permission to access this page!");
+}
+$sla = $slas->get_sla();
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -57,15 +58,15 @@ $sla 		= $slas->get_sla();
     </thead>
     <tbody>
 		<?php 
-		foreach ($sla as $slaval) {
-			echo '<tr><td>'.$slaval['slaid'].'</td>'.
-				 '<td><a href=slaedit.php?id='.$slaval['slaid']. '>'.$slaval['namasla'].'</a></td>'.
-				 '<td>'.$slaval['responsetime'].' Hours</td>'.
-				 '<td>'.$slaval['resolutiontime'].' Hours</td>'.
-				 '<td>'.$slaval['slawarning'].' Hours</td>'.
-				 '<td><a href=sladel.php?id='.$slaval['slaid']. ' onclick="return delete_confirm();">del</a></td></tr>';
-		}
-		?>
+        foreach ($sla as $slaval) {
+            echo '<tr><td>'.$slaval['slaid'].'</td>'.
+                 '<td><a href=slaedit.php?id='.$slaval['slaid'].'>'.$slaval['namasla'].'</a></td>'.
+                 '<td>'.$slaval['responsetime'].' Hours</td>'.
+                 '<td>'.$slaval['resolutiontime'].' Hours</td>'.
+                 '<td>'.$slaval['slawarning'].' Hours</td>'.
+                 '<td><a href=sladel.php?id='.$slaval['slaid'].' onclick="return delete_confirm();">del</a></td></tr>';
+        }
+        ?>
     </tbody>
 	</table>
 	</div>

@@ -1,18 +1,18 @@
 <?php 
 require 'core/init.php';
 $general->logged_out_protect();
-if (isset($_POST['submit']))
-{	$namacustomer 	= $_POST['namacustomer'];
-	$password 		= $_POST['password'];
-	$alamat 		= $_POST['alamat'];
-	$Telp 			= $_POST['telp'];
-	$email 			= $_POST['email'];
-	$PIC 			= $_POST['PIC'];
-	$selesperson 	= $_POST['selesperson'];
-	$customerproduct= $_POST['customerproduct'];
-	$customers->add_customer($namacustomer,$alamat,$Telp,$email,$PIC,$selesperson,$customerproduct);
-	header('Location: customerlist.php');
-	exit();
+if (isset($_POST['submit'])) {
+    $namacustomer = $_POST['namacustomer'];
+    $password = $_POST['password'];
+    $alamat = $_POST['alamat'];
+    $Telp = $_POST['telp'];
+    $email = $_POST['email'];
+    $PIC = $_POST['PIC'];
+    $selesperson = $_POST['selesperson'];
+    $customerproduct = $_POST['customerproduct'];
+    $customers->add_customer($namacustomer, $alamat, $Telp, $email, $PIC, $selesperson, $customerproduct);
+    header('Location: customerlist.php');
+    exit();
 }
 ?>
 <!DOCTYPE HTML>
@@ -120,9 +120,9 @@ if (isset($_POST['submit']))
 	</form>
 
 	<?php 
-	if(empty($errors) === false){
-		echo '<p class=errormsg>' . implode('</p><p class=errormsg>', $errors) . '</p>';
-	}
-	?>
+    if (empty($errors) === false) {
+        echo '<p class=errormsg>'.implode('</p><p class=errormsg>', $errors).'</p>';
+    }
+    ?>
 </body>
 </html>

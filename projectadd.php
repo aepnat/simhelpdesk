@@ -1,31 +1,31 @@
 <?php 
-date_default_timezone_set("Asia/Jakarta");
+date_default_timezone_set('Asia/Jakarta');
 $date = date('m/d/Y h:i:s', time());
 require 'core/init.php';
 $general->logged_out_protect();
-if (isset($_POST['submit']))
-{	$projectname 	= $_POST['projectname'];
-	$idcustomer 	= $_POST['idcustomer'];
-	
-	$deliverybegin 	= strtotime($_POST['deliverybegin']);
-	$deliveryend 	= strtotime($_POST['deliveryend']);
-	
-	$installbegin 	= strtotime($_POST['installbegin']);
-	$installend 	= strtotime($_POST['installend']);
+if (isset($_POST['submit'])) {
+    $projectname = $_POST['projectname'];
+    $idcustomer = $_POST['idcustomer'];
 
-	$uatbegin 	= strtotime($_POST['uatbegin']);
-	$uatend 	= strtotime($_POST['uatend']);
-	
-	$billstartdate 	= strtotime($_POST['billstartdate']);
-	$billduedate 	= strtotime($_POST['billduedate']);
-	
-	$warrantyperiod = $_POST['warrantyperiod'];
+    $deliverybegin = strtotime($_POST['deliverybegin']);
+    $deliveryend = strtotime($_POST['deliveryend']);
 
-	$contractstartdate 	= strtotime($_POST['contractstartdate']);
-	$contractperiod = $_POST['contractperiod'];
-	
-	$projects->add_project($projectname,$idcustomer,$deliverybegin,$deliveryend,$installbegin,$installend,$uatbegin,$uatend,$billstartdate,$billduedate,$warrantyperiod,$contractstartdate,$contractperiod);
-	header('location: projectlist.php');
+    $installbegin = strtotime($_POST['installbegin']);
+    $installend = strtotime($_POST['installend']);
+
+    $uatbegin = strtotime($_POST['uatbegin']);
+    $uatend = strtotime($_POST['uatend']);
+
+    $billstartdate = strtotime($_POST['billstartdate']);
+    $billduedate = strtotime($_POST['billduedate']);
+
+    $warrantyperiod = $_POST['warrantyperiod'];
+
+    $contractstartdate = strtotime($_POST['contractstartdate']);
+    $contractperiod = $_POST['contractperiod'];
+
+    $projects->add_project($projectname, $idcustomer, $deliverybegin, $deliveryend, $installbegin, $installend, $uatbegin, $uatend, $billstartdate, $billduedate, $warrantyperiod, $contractstartdate, $contractperiod);
+    header('location: projectlist.php');
 }
 ?>
 <!DOCTYPE HTML>
@@ -75,13 +75,13 @@ if (isset($_POST['submit']))
 			<td> Customer : </td>
 			<td> 
 			<?php
-				$customers = $customers->get_customers();
-				echo '<select name="idcustomer">';
-				foreach ($customers as $customerval)
-				{	echo '<option value=' . $customerval['idcustomer'] . '>' .  $customerval['namacustomer'] . '</option>';
-				}
-				echo '</select>';
-			?>
+                $customers = $customers->get_customers();
+                echo '<select name="idcustomer">';
+                foreach ($customers as $customerval) {
+                    echo '<option value='.$customerval['idcustomer'].'>'.$customerval['namacustomer'].'</option>';
+                }
+                echo '</select>';
+            ?>
 			</td>
 		</tr>
 	</table><br/>
@@ -163,9 +163,9 @@ if (isset($_POST['submit']))
 	</form>
 
 	<?php 
-	if(empty($errors) === false){
-		echo '<p class=errormsg>' . implode('</p><p class=errormsg>', $errors) . '</p>';
-	}
-	?>
+    if (empty($errors) === false) {
+        echo '<p class=errormsg>'.implode('</p><p class=errormsg>', $errors).'</p>';
+    }
+    ?>
 </body>
 </html>

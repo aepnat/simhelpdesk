@@ -2,9 +2,10 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $user = $users->userdata($_SESSION['loginid']);
-if($user['level'] != "Admin")
-{ 	exit("You don't have permission to access this page!"); }
-$logs 	= $emails->get_email();
+if ($user['level'] != 'Admin') {
+    exit("You don't have permission to access this page!");
+}
+$logs = $emails->get_email();
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -54,14 +55,14 @@ $logs 	= $emails->get_email();
     </thead>
     <tbody>
 		<?php 
-		foreach ($logs as $log)
-		{	echo '<tr><td>'.date('d-M-Y H:i', $log['senddate']).'</td>'.
-				 '<td>'.$log['emailto'].'</td>'.
-				 '<td>'.$log['emailcc'].'</td>'.
-				 '<td>'.$log['emailsubject'].'</td>'.
-				 '<td>'.$log['emailstatus'].'</td></tr>';
-		}
-		?>
+        foreach ($logs as $log) {
+            echo '<tr><td>'.date('d-M-Y H:i', $log['senddate']).'</td>'.
+                 '<td>'.$log['emailto'].'</td>'.
+                 '<td>'.$log['emailcc'].'</td>'.
+                 '<td>'.$log['emailsubject'].'</td>'.
+                 '<td>'.$log['emailstatus'].'</td></tr>';
+        }
+        ?>
     </tbody>
 	</table>
 </body>
