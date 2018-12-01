@@ -27,8 +27,6 @@ $general->logged_out_protect();
 <div id="headleftmenu">System</div>
 <ul>
   <li><a href="userlog.php" target="contentFrame">User Log</a></li>
-  <li><a href="emaillog.php" target="contentFrame">Email Log</a></li>
-  <li><a href="emailqueue.php" target="contentFrame">Email Queue</a></li>
   </ul>
 </div>
 </body>
