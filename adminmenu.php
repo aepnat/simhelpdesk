@@ -21,7 +21,6 @@ $general->logged_out_protect();
 <ul>
   <li><a href="ticketlist.php" target="contentFrame">List all Tickets</a></li>
   <li><a href="slalist.php" target="contentFrame">SLA Setting</a></li>
-  <li><a href="hdnews.php" target="contentFrame">Helpdesk News</a></li>
 </ul>
 </div>
 <div id="leftmenu">
