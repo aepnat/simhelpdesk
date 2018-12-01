@@ -1,24 +1,24 @@
 <?php 
 require 'core/init.php';
 $general->logged_out_protect();
-if (isset($_POST['submit'])) 
-{	if ($users->user_exists($_POST['username']) == true && !empty($_POST['username']))
-    {	$errors[] = 'Sorry, username '.$_POST['username'].' is already exists!';
-	}
-	if ($users->email_exists($_POST['email']) == true && !empty($_POST['email']))
-    {	$errors[] = 'Sorry, email '.$_POST['email'].' is already exists!';
-	}
-	if(empty($errors) === true)
-	{	$fullname 	= $_POST['fullname'];
-		$username 	= htmlentities($_POST['username']);
-		$password 	= $_POST['password'];
-		$email 		= htmlentities($_POST['email']);
-		$Telp 		= $_POST['telp'];
-		$level 		= $_POST['level'];
-		$locked 	= $_POST['locked'];
-		$users->register($username,$password,$email,$fullname,$Telp,$level,$locked);
-		header('Location: userlist.php');
-	}
+if (isset($_POST['submit'])) {
+    if ($users->user_exists($_POST['username']) == true && !empty($_POST['username'])) {
+        $errors[] = 'Sorry, username '.$_POST['username'].' is already exists!';
+    }
+    if ($users->email_exists($_POST['email']) == true && !empty($_POST['email'])) {
+        $errors[] = 'Sorry, email '.$_POST['email'].' is already exists!';
+    }
+    if (empty($errors) === true) {
+        $fullname = $_POST['fullname'];
+        $username = htmlentities($_POST['username']);
+        $password = $_POST['password'];
+        $email = htmlentities($_POST['email']);
+        $Telp = $_POST['telp'];
+        $level = $_POST['level'];
+        $locked = $_POST['locked'];
+        $users->register($username, $password, $email, $fullname, $Telp, $level, $locked);
+        header('Location: userlist.php');
+    }
 }
 ?>
 <!DOCTYPE HTML>
@@ -102,9 +102,9 @@ if (isset($_POST['submit']))
 	</fieldset>
 	</form>
 	<?php 
-	if(empty($errors) === false){
-		echo '<p class=errormsg>' . implode('</p><p class=errormsg>', $errors) . '</p>';
-	}
-	?>
+    if (empty($errors) === false) {
+        echo '<p class=errormsg>'.implode('</p><p class=errormsg>', $errors).'</p>';
+    }
+    ?>
 </body>
 </html>

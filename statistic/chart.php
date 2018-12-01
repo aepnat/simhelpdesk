@@ -5,41 +5,40 @@ $general->logged_out_protect();
 //if($user['level'] != "Manager")
 //{ 	exit("You don't have permission to access this page!"); }
 $ticket_list = $tickets->count_tickets_by_customer();
-$i=0;$color[0]='FF0000';$color[1]='00FF00';$color[2]='FFFF00';$color[3]='0000FF';$color[4]='FF00FF';
-foreach ($ticket_list as $ticket) 
-{	$customer  = $customers->customer_data($ticket['idcustomer']);
-	//$datachart .= "<set value='$ticket[total]' name='$customer[namacustomer]' color='$color[$i]' />";
-	//$datachart1 = htmlspecialchars($datachart);
-	@$value .= $ticket['total'].'#'; 
-	@$name .= $customer['namacustomer'].'#';
-	//echo $value[i].'<br>'.$name[i].'<br>';
-	//$color[$i++];
+$i = 0; $color[0] = 'FF0000'; $color[1] = '00FF00'; $color[2] = 'FFFF00'; $color[3] = '0000FF'; $color[4] = 'FF00FF';
+foreach ($ticket_list as $ticket) {
+    $customer = $customers->customer_data($ticket['idcustomer']);
+    //$datachart .= "<set value='$ticket[total]' name='$customer[namacustomer]' color='$color[$i]' />";
+    //$datachart1 = htmlspecialchars($datachart);
+    @$value .= $ticket['total'].'#';
+    @$name .= $customer['namacustomer'].'#';
+    //echo $value[i].'<br>'.$name[i].'<br>';
+    //$color[$i++];
 }
-$arr_value = explode("#", $value);
-$arr_name = explode("#", $name);
+$arr_value = explode('#', $value);
+$arr_name = explode('#', $name);
 //echo $arr_name[0].$arr_name[1].$arr_name[2].$arr_name[3].$arr_name[4];
 $ticket_list2 = $tickets->count_tickets_by_status();
-foreach ($ticket_list2 as $ticket2) 
-{	//$customer2  = $customers->customer_data($ticket2['idcustomer']);
-	//$datachart .= "<set value='$ticket[total]' name='$customer[namacustomer]' color='$color[$i]' />";
-	//$datachart1 = htmlspecialchars($datachart);
-	@$value2 .= $ticket2['total'].'#'; 
-	@$name2 .= $ticket2['ticketstatus'].'#';
-	//echo $value[i].'<br>'.$name[i].'<br>';
-	//$color[$i++];
+foreach ($ticket_list2 as $ticket2) {	//$customer2  = $customers->customer_data($ticket2['idcustomer']);
+    //$datachart .= "<set value='$ticket[total]' name='$customer[namacustomer]' color='$color[$i]' />";
+    //$datachart1 = htmlspecialchars($datachart);
+    @$value2 .= $ticket2['total'].'#';
+    @$name2 .= $ticket2['ticketstatus'].'#';
+    //echo $value[i].'<br>'.$name[i].'<br>';
+    //$color[$i++];
 }
-$arr_value2 = explode("#", $value2);
-$arr_name2 = explode("#", $name2);
+$arr_value2 = explode('#', $value2);
+$arr_name2 = explode('#', $name2);
 
-$ResolvedBulan=Array(0,0,0,0,0,0,0,0,0,0,0,0,0);
+$ResolvedBulan = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 $ticket_list3 = $tickets->count_resolved_tickets_by_month();
-foreach ($ticket_list3 as $ticket3) 
-{	@$ResolvedBulan[$ticket3['Bulan']]=$ticket3['Total'];
+foreach ($ticket_list3 as $ticket3) {
+    @$ResolvedBulan[$ticket3['Bulan']] = $ticket3['Total'];
 }
-$InProgressBulan=Array(0,0,0,0,0,0,0,0,0,0,0,0,0);
+$InProgressBulan = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 $ticket_list4 = $tickets->count_inprogress_tickets_by_month();
-foreach ($ticket_list4 as $ticket4) 
-{	@$InProgressBulan[$ticket4['Bulan']]=$ticket4['Total'];
+foreach ($ticket_list4 as $ticket4) {
+    @$InProgressBulan[$ticket4['Bulan']] = $ticket4['Total'];
 }
 ?>
 <!DOCTYPE html>
@@ -71,11 +70,11 @@ foreach ($ticket_list4 as $ticket4)
 		type: "Pie2D",
 		data:	"<graph caption='Top 5 Ticket Received By Company' subcaption='This Year' decimalPrecision='0'" +
 				"bgColor='b9c9fe' baseFontSize='12' Bold='1' showNames='1' showPercentageInLabel='1'>" +
-				"<set value='<?php echo $arr_value[0];?>' name='<?php echo $arr_name[0];?>' color='FF00FF' />" +
-				"<set value='<?php echo $arr_value[1];?>' name='<?php echo $arr_name[1];?>' color='00FFFF' />" +
-				"<set value='<?php echo $arr_value[2];?>' name='<?php echo $arr_name[2];?>' color='990000' />" +
-				"<set value='<?php echo $arr_value[3];?>' name='<?php echo $arr_name[3];?>' color='660099' />" +
-				"<set value='<?php echo $arr_value[4];?>' name='<?php echo $arr_name[4];?>' color='FF9900' /> </graph>",
+				"<set value='<?php echo $arr_value[0]; ?>' name='<?php echo $arr_name[0]; ?>' color='FF00FF' />" +
+				"<set value='<?php echo $arr_value[1]; ?>' name='<?php echo $arr_name[1]; ?>' color='00FFFF' />" +
+				"<set value='<?php echo $arr_value[2]; ?>' name='<?php echo $arr_name[2]; ?>' color='990000' />" +
+				"<set value='<?php echo $arr_value[3]; ?>' name='<?php echo $arr_name[3]; ?>' color='660099' />" +
+				"<set value='<?php echo $arr_value[4]; ?>' name='<?php echo $arr_name[4]; ?>' color='FF9900' /> </graph>",
 		dataFormat: "XMLData",
 		width: "520",
 		height: "300"
@@ -85,10 +84,10 @@ foreach ($ticket_list4 as $ticket4)
 		type: "Pie2D",
 		data:	"<graph caption='Ticket Received By Status' subcaption='This Year' decimalPrecision='0'" +
 				"bgColor='b9c9fe' baseFontSize='12' Bold='1' showNames='1' showPercentageInLabel='1'>" +
-				"<set value='<?php echo $arr_value2[0];?>' name='<?php echo $arr_name2[0];?>' color='<?php echo $color[0];?>' />" +
-				"<set value='<?php echo $arr_value2[1];?>' name='<?php echo $arr_name2[1];?>' color='<?php echo $color[1];?>' />" +
-				"<set value='<?php echo $arr_value2[2];?>' name='<?php echo $arr_name2[2];?>' color='<?php echo $color[2];?>' />" +
-				"<set value='<?php echo $arr_value2[3];?>' name='<?php echo $arr_name2[3];?>' color='<?php echo $color[3];?>' /> </graph>",
+				"<set value='<?php echo $arr_value2[0]; ?>' name='<?php echo $arr_name2[0]; ?>' color='<?php echo $color[0]; ?>' />" +
+				"<set value='<?php echo $arr_value2[1]; ?>' name='<?php echo $arr_name2[1]; ?>' color='<?php echo $color[1]; ?>' />" +
+				"<set value='<?php echo $arr_value2[2]; ?>' name='<?php echo $arr_name2[2]; ?>' color='<?php echo $color[2]; ?>' />" +
+				"<set value='<?php echo $arr_value2[3]; ?>' name='<?php echo $arr_name2[3]; ?>' color='<?php echo $color[3]; ?>' /> </graph>",
 		dataFormat: "XMLData",
 		width: "520",
 		height: "300"

@@ -2,19 +2,19 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $user = $users->userdata($_SESSION['loginid']);
-$closetickets =  $tickets->get_tickets_by_status("Closed");
-$tickets_count 	= count($closetickets);
-$period1		= date('d-M-Y',strtotime("-1 month",time()));
-$period2 		= date('d-M-Y',time());
+$closetickets = $tickets->get_tickets_by_status('Closed');
+$tickets_count = count($closetickets);
+$period1 = date('d-M-Y', strtotime('-1 month', time()));
+$period2 = date('d-M-Y', time());
 $p1 = strtotime($period1);
 $p2 = strtotime($period2);
 $listtickets = $tickets->search_closed_ticket($p1, $p2);
-if (isset($_POST['submit']))
-{	$period1 	= strtotime($_POST['period1']);
-	$period2 	= strtotime($_POST['period2']);
-	$listtickets = $tickets->search_closed_ticket($period1, $period2);
-	$period1	= date('d-M-Y',$period1);
-	$period2 	= date('d-M-Y',$period2);
+if (isset($_POST['submit'])) {
+    $period1 = strtotime($_POST['period1']);
+    $period2 = strtotime($_POST['period2']);
+    $listtickets = $tickets->search_closed_ticket($period1, $period2);
+    $period1 = date('d-M-Y', $period1);
+    $period2 = date('d-M-Y', $period2);
 }
 ?>
 <!doctype html>
@@ -79,20 +79,20 @@ if (isset($_POST['submit']))
     </thead>
     <tbody>
 		<?php 
-		foreach ($listtickets as $ticket) {
-			$sla = $slas->sla_data($ticket['sla']);
-			$customer = $customers->customer_data($ticket['idcustomer']);
-			$user = $users->userdata($ticket['assignee']);
-			echo '<tr><td><a href=ticketread.php?id='.$ticket['id']. '>'.$ticket['ticketnumber'].'</a></td>'.
-				 '<td>'.$sla['namasla'].'</td>'.
-				 '<td>'.$customer['namacustomer'].'</td>'.
-				 '<td>'.date('d-M-Y',$ticket['reporteddate']).'</td>'.
-				 '<td>'.$ticket['reportedby'].'</td>'.
-				 '<td>'.$ticket['problemsummary'].'</td>'.
-				 '<td>'.$ticket['ticketstatus'].'</td>'.
-				 '<td>'.$user['fullname'].'</td></tr>';
-		}
-		?>
+        foreach ($listtickets as $ticket) {
+            $sla = $slas->sla_data($ticket['sla']);
+            $customer = $customers->customer_data($ticket['idcustomer']);
+            $user = $users->userdata($ticket['assignee']);
+            echo '<tr><td><a href=ticketread.php?id='.$ticket['id'].'>'.$ticket['ticketnumber'].'</a></td>'.
+                 '<td>'.$sla['namasla'].'</td>'.
+                 '<td>'.$customer['namacustomer'].'</td>'.
+                 '<td>'.date('d-M-Y', $ticket['reporteddate']).'</td>'.
+                 '<td>'.$ticket['reportedby'].'</td>'.
+                 '<td>'.$ticket['problemsummary'].'</td>'.
+                 '<td>'.$ticket['ticketstatus'].'</td>'.
+                 '<td>'.$user['fullname'].'</td></tr>';
+        }
+        ?>
     </tbody>
 	<tfoot>
     <tr>

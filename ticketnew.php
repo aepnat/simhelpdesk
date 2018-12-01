@@ -4,58 +4,65 @@ require 'core/init.php';
 $general->logged_out_protect();
 $changeby = $_SESSION['loginid'];
 $documentedby = $_SESSION['loginid'];
-if (isset($_POST['submit']))
-{	$lastticket 	= $tickets->get_last_ticket();
-	$id				= $lastticket['id'] + 1;
-	$ticketnumber 	= $id . '/SR/'.date("M").'/'.date("Y"); //format nomor tiket
-	$sla 			= $_POST['sla'];
-	//$idcustomer		= $_POST['idcustomer'];
-	$reporteddate 	= strtotime($_POST['reporteddate']);
-	$reportedby		= $_POST['reportedby'];
-	$telp 			= $_POST['telp'];
-	$email 			= $_POST['email'];
-	$problemsummary	= $_POST['problemsummary'];
-	$problemdetail	= $_POST['problemdetail'];
-	$ticketstatus	= 'Assigned'; //ketika pertama kali dibuat, status="Assigned" ke salah satu teknisi
-	$assignee		= $_POST['idassignee'];
-	$pro 			= $_POST['pro'];
-	$user_assignee	= $users->userdata($assignee);
-	$email_assignee = $user_assignee['email'];
-	$changes		= 'Create New Ticket';
-	$emailcc		= '';
-	$emailbcc		= '';
-	$fullname_assignee = $user_assignee['fullname'];
-	if($sla == '1')
-	{	$managers = $users->get_user_by_level("Manager");
-		$i=0;
-		foreach ($managers as $manager)
-		{	$manageremail[$i] = $manager['email'];
-			$emailcc .= $manageremail[$i] . ', ';		
-			$i++;
-		}
-	}
-	$emailstatus='New';
-	$senddate = time();
-	$datasla=$slas->sla_data($sla);
-	$resolutiontime=$datasla['resolutiontime'];
-	$slasenddate=strtotime("+$resolutiontime hours",$senddate);
-	$emailsubject = "Ticket No: $ticketnumber has assigned to you";
-	$message = 
+if (isset($_POST['submit'])) {
+    $lastticket = $tickets->get_last_ticket();
+    $id = $lastticket['id'] + 1;
+    $ticketnumber = $id.'/SR/'.date('M').'/'.date('Y'); //format nomor tiket
+    $sla = $_POST['sla'];
+    //$idcustomer		= $_POST['idcustomer'];
+    $reporteddate = strtotime($_POST['reporteddate']);
+    $reportedby = $_POST['reportedby'];
+    $telp = $_POST['telp'];
+    $email = $_POST['email'];
+    $problemsummary = $_POST['problemsummary'];
+    $problemdetail = $_POST['problemdetail'];
+    $ticketstatus = 'Assigned'; //ketika pertama kali dibuat, status="Assigned" ke salah satu teknisi
+    $assignee = $_POST['idassignee'];
+    $pro = $_POST['pro'];
+    $user_assignee = $users->userdata($assignee);
+    $email_assignee = $user_assignee['email'];
+    $changes = 'Create New Ticket';
+    $emailcc = '';
+    $emailbcc = '';
+    $fullname_assignee = $user_assignee['fullname'];
+    if ($sla == '1') {
+        $managers = $users->get_user_by_level('Manager');
+        $i = 0;
+        foreach ($managers as $manager) {
+            $manageremail[$i] = $manager['email'];
+            $emailcc .= $manageremail[$i].', ';
+            $i++;
+        }
+    }
+    $emailstatus = 'New';
+    $senddate = time();
+    $datasla = $slas->sla_data($sla);
+    $resolutiontime = $datasla['resolutiontime'];
+    $slasenddate = strtotime("+$resolutiontime hours", $senddate);
+    $emailsubject = "Ticket No: $ticketnumber has assigned to you";
+    $message =
 "Dear $fullname_assignee, \r\n
 You are currently assign for this ticket.\r\n
 Please follow this link to resolved the ticket --> http://localhost/helpdesk/ticketedit.php?id=$id"." \r\n
 Thank you. \r\n
 Regards, \r\n
 Helpdesk";
-	$tickets->add_ticket($ticketnumber,$sla,$reporteddate,$reportedby,$telp,$email,$problemsummary,$problemdetail,$ticketstatus,$assignee,$documentedby,$pro);
-	$assigneddate='';$pendingby='';$pendingdate='';$resolution='';$resolvedby='';$resolveddate='';$closedby='';$closeddate='';
-	$tickets->log_tickets($id,$sla,$reporteddate,$reportedby,$telp,$email,$problemsummary,$problemdetail,$ticketstatus,$assignee,$assigneddate,$pendingby, $pendingdate, $resolution,$resolvedby,$resolveddate,$closedby,$closeddate,$changes,$changeby);
-	$emails->add_email($id,$senddate,$email_assignee,$emailcc,$emailbcc,$emailsubject,$message,$emailstatus);
-	$emails->add_sla_remainder($id,$ticketnumber,$slasenddate,$email_assignee,$emailcc,$emailbcc,$emailsubject,$message);
-	$result=$emails->send_new_ticket();
-	//echo $result;
-	header("Location: ticketread.php?id=$id");
-	//echo $senddate."<br>".$resolutiontime."<br>".$slasenddate;
+    $tickets->add_ticket($ticketnumber, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $documentedby, $pro);
+    $assigneddate = '';
+    $pendingby = '';
+    $pendingdate = '';
+    $resolution = '';
+    $resolvedby = '';
+    $resolveddate = '';
+    $closedby = '';
+    $closeddate = '';
+    $tickets->log_tickets($id, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $assigneddate, $pendingby, $pendingdate, $resolution, $resolvedby, $resolveddate, $closedby, $closeddate, $changes, $changeby);
+    $emails->add_email($id, $senddate, $email_assignee, $emailcc, $emailbcc, $emailsubject, $message, $emailstatus);
+    $emails->add_sla_remainder($id, $ticketnumber, $slasenddate, $email_assignee, $emailcc, $emailbcc, $emailsubject, $message);
+    $result = $emails->send_new_ticket();
+    //echo $result;
+    header("Location: ticketread.php?id=$id");
+    //echo $senddate."<br>".$resolutiontime."<br>".$slasenddate;
 }
 ?>
 <!DOCTYPE HTML>
@@ -170,12 +177,12 @@ Helpdesk";
 			<td> <select name="idcustomer" id="idcustomer">
 				<option></option>
 			// <?php
-				// $customers = $customers->get_customers();
-				// foreach ($customers as $customerval)
-				// {	
-					// echo '<option value=' . $customerval['idcustomer'] . '>' .  $customerval['namacustomer'] . '</option>';
-				// }
-			// ?>
+                // $customers = $customers->get_customers();
+                // foreach ($customers as $customerval)
+                // {
+                    // echo '<option value=' . $customerval['idcustomer'] . '>' .  $customerval['namacustomer'] . '</option>';
+                // }
+            //?>
 			</select></td>
 		</tr>
 		<tr>
@@ -203,7 +210,7 @@ Helpdesk";
 		</tr>
 		<tr>
 			<td> Reported Date*</td><td> : </td>
-			<td><input type="text" id="reporteddate" name="reporteddate" readonly="readonly" value="<?php echo date('d-M-Y',time()); ?>"> </td>
+			<td><input type="text" id="reporteddate" name="reporteddate" readonly="readonly" value="<?php echo date('d-M-Y', time()); ?>"> </td>
 		</tr>
 		<tr>
 			<td> Reported By* </td><td> : </td>
@@ -213,12 +220,12 @@ Helpdesk";
 			<td> Urgency (SLA)*</td><td> : </td>
 			<td><select name="sla">
 				<?php 
-					$sla = $slas->get_sla();
-					echo '<option value="'.$slaval['slaid'].'" selected="selected">'.$slaval['namasla'].'</option>';
-					foreach ($sla as $slaval) 
-					{	echo '<option value="'.$slaval['slaid'].'">'.$slaval['namasla'].'</option>';
-					}
-				?>
+                    $sla = $slas->get_sla();
+                    echo '<option value="'.$slaval['slaid'].'" selected="selected">'.$slaval['namasla'].'</option>';
+                    foreach ($sla as $slaval) {
+                        echo '<option value="'.$slaval['slaid'].'">'.$slaval['namasla'].'</option>';
+                    }
+                ?>
 				</select>
 			</td>
 		</tr>
@@ -226,11 +233,11 @@ Helpdesk";
 			<td> Type</td><td> : </td>
 			<td><select name="pro">
 				<?php 
-					//$pro = $slas->get_sla();
-					echo '<option value=""></option>';
-					echo '<option value="Hardware">Hardware</option>';
-					echo '<option value="Software">Software</option>';
-				?>
+                    //$pro = $slas->get_sla();
+                    echo '<option value=""></option>';
+                    echo '<option value="Hardware">Hardware</option>';
+                    echo '<option value="Software">Software</option>';
+                ?>
 				</select>
 			</td>
 		</tr>
@@ -247,13 +254,12 @@ Helpdesk";
 			<td> <select name="idassignee">
 				<option> </option>
 			<?php
-				$Asignees = $users->get_users();
-				foreach ($Asignees as $user)
-				{	
-					//echo '<option value=' . $user['id'] . '>' .  $user['fullname'] . '</option>';
-					echo '<option selected value=' . $user['id'] . '>' .  $user['fullname'] . '</option>';
-				}
-			?>
+                $Asignees = $users->get_users();
+                foreach ($Asignees as $user) {
+                    //echo '<option value=' . $user['id'] . '>' .  $user['fullname'] . '</option>';
+                    echo '<option selected value='.$user['id'].'>'.$user['fullname'].'</option>';
+                }
+            ?>
 			</select> </td>
 		</tr>
 		<tr>
@@ -277,9 +283,9 @@ Helpdesk";
 	</form>
 
 	<?php 
-	if(empty($errors) === false){
-		echo '<p class=errormsg>' . implode('</p><p class=errormsg>', $errors) . '</p>';
-	}
-	?>
+    if (empty($errors) === false) {
+        echo '<p class=errormsg>'.implode('</p><p class=errormsg>', $errors).'</p>';
+    }
+    ?>
 </body>
 </html>

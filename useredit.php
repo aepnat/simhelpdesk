@@ -1,21 +1,22 @@
 <?php 
 require 'core/init.php';
 $general->logged_out_protect();
-$id=$_GET['id'];
-$member=$users->userdata($id);
-if (isset($_POST['submit']))
-{	$fullname 	= $_POST['fullname'];
-	$username 	= htmlentities($_POST['username']);
-	$password 	= $_POST['password'];
-	$email 		= htmlentities($_POST['email']);
-	$Telp 		= $_POST['telp'];
-	$level 		= $_POST['level'];
-	$locked 	= $_POST['locked'];
-	//echo 'Old Passw: '.$member['password']. ' New Passw:'. $password;
-	if ($password=="")
-	{	$password = $member['password'];}
-	$users->update($id,$username,$password,$email,$fullname,$Telp,$level,$locked);
-	header('Location: userlist.php');
+$id = $_GET['id'];
+$member = $users->userdata($id);
+if (isset($_POST['submit'])) {
+    $fullname = $_POST['fullname'];
+    $username = htmlentities($_POST['username']);
+    $password = $_POST['password'];
+    $email = htmlentities($_POST['email']);
+    $Telp = $_POST['telp'];
+    $level = $_POST['level'];
+    $locked = $_POST['locked'];
+    //echo 'Old Passw: '.$member['password']. ' New Passw:'. $password;
+    if ($password == '') {
+        $password = $member['password'];
+    }
+    $users->update($id, $username, $password, $email, $fullname, $Telp, $level, $locked);
+    header('Location: userlist.php');
 }
 ?>
 <!DOCTYPE HTML>

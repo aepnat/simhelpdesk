@@ -2,9 +2,9 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $changeby = $_SESSION['loginid'];
-$user 	= $users->userdata($_SESSION['loginid']);
-$id		= $_GET['id'];
-$ticket	= $tickets->ticket_data($id);
+$user = $users->userdata($_SESSION['loginid']);
+$id = $_GET['id'];
+$ticket = $tickets->ticket_data($id);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -29,9 +29,9 @@ $ticket	= $tickets->ticket_data($id);
 			<td width="120"> Customer </td><td> : </td>
 			<td> 
 			// <?php 
-				// $customer=$customers->customer_data($ticket['idcustomer']);
-				// echo $customer['namacustomer'];
-			// ?> </td>
+                // $customer=$customers->customer_data($ticket['idcustomer']);
+                // echo $customer['namacustomer'];
+            //?> </td>
 		// </tr>
 		// <tr>
 			// <td> Customer Product</td><td> : </td>
@@ -41,16 +41,16 @@ $ticket	= $tickets->ticket_data($id);
 			// <td> Warranty Period</td><td> : </td>
 			// <td> 
 			// <?php 
-				// $project=$projects->get_project_customer($customer['idcustomer']);
-				// echo $project['warrantyperiod'].' Year';
-			// ?> </td>
+                // $project=$projects->get_project_customer($customer['idcustomer']);
+                // echo $project['warrantyperiod'].' Year';
+            //?> </td>
 		// </tr>
 		// <tr>
 			// <td> Contract Period</td><td> : </td>
 			// <td>
 			// <?php
-				// echo $project['contractperiod'].' Month';
-			// ?>
+                // echo $project['contractperiod'].' Month';
+            //?>
 			</td>
 		</tr>
 	</table>
@@ -64,7 +64,7 @@ $ticket	= $tickets->ticket_data($id);
 		</tr>
 		<tr>
 			<td> Reported Date</td><td> : </td>
-			<td> <?php echo date('d-M-Y',$ticket['reporteddate']); ?> </td>
+			<td> <?php echo date('d-M-Y', $ticket['reporteddate']); ?> </td>
 		</tr>
 		<tr>
 			<td> Reported By </td><td> : </td>
@@ -74,9 +74,9 @@ $ticket	= $tickets->ticket_data($id);
 			<td> Urgency (SLA)</td><td> : </td>
 			<td> 
 			<?php 
-				$sladata = $slas->sla_data($ticket['sla']);
-				echo $sladata['namasla'];
-			?>
+                $sladata = $slas->sla_data($ticket['sla']);
+                echo $sladata['namasla'];
+            ?>
 			</td>
 		</tr>
 		<tr>
@@ -102,9 +102,9 @@ $ticket	= $tickets->ticket_data($id);
 			<td width="120"> Assign to </td><td> : </td>
 			<td> 
 			<?php
-				$userassignee = $users->userdata($ticket['assignee']);
-				echo $userassignee['fullname'];
-			?>
+                $userassignee = $users->userdata($ticket['assignee']);
+                echo $userassignee['fullname'];
+            ?>
 			</td>
 		</tr>
 		<tr>
@@ -124,14 +124,14 @@ $ticket	= $tickets->ticket_data($id);
 	<table class="formtable">
 	<tr bgcolor="#e0e0e0" ><td width="150">Updated On</td><td width="150">Updated By</td><td>Description</td></tr>
 	<?php
-		$list_log_tickets = $tickets->get_audit_trail($id);
-		foreach ($list_log_tickets as $log_ticket)
-		{	$changed_by = $users->userdata($log_ticket['changeby']);
-			echo '<tr><td>'.date('d-M-Y H:i:s',$log_ticket['changedate']).'</td>'.
-				 '<td>'.$changed_by['fullname'].'</td>'.
-				 '<td>'.$log_ticket['changes'].'</td></tr>';
-		}
-	?>
+        $list_log_tickets = $tickets->get_audit_trail($id);
+        foreach ($list_log_tickets as $log_ticket) {
+            $changed_by = $users->userdata($log_ticket['changeby']);
+            echo '<tr><td>'.date('d-M-Y H:i:s', $log_ticket['changedate']).'</td>'.
+                 '<td>'.$changed_by['fullname'].'</td>'.
+                 '<td>'.$log_ticket['changes'].'</td></tr>';
+        }
+    ?>
 	</table>
 	</fieldset>
 	<br/><br/>

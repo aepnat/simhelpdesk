@@ -2,9 +2,10 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $user = $users->userdata($_SESSION['loginid']);
-if($user['level'] != "Admin")
-{ 	exit("You don't have permission to access this page!"); }
-$logs 		= $users->get_users_log();
+if ($user['level'] != 'Admin') {
+    exit("You don't have permission to access this page!");
+}
+$logs = $users->get_users_log();
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -54,15 +55,15 @@ $logs 		= $users->get_users_log();
     </thead>
     <tbody>
 		<?php 
-		foreach ($logs as $log)
-		{	$username = $users->get_user_by_id($log['iduser']);
-			echo '<tr><td>'.date('d-M-Y H:i', $log['time']).'</td>'.
-				 '<td>'.$username['username'].'</td>'.
-				 '<td>'.$log['ip'].'</td>'.
-				 '<td>'.$log['browser'].'</td>'.
-				 '<td>'.$log['log'].'</td></tr>';
-		}
-		?>
+        foreach ($logs as $log) {
+            $username = $users->get_user_by_id($log['iduser']);
+            echo '<tr><td>'.date('d-M-Y H:i', $log['time']).'</td>'.
+                 '<td>'.$username['username'].'</td>'.
+                 '<td>'.$log['ip'].'</td>'.
+                 '<td>'.$log['browser'].'</td>'.
+                 '<td>'.$log['log'].'</td></tr>';
+        }
+        ?>
     </tbody>
 	</table>
 </body>
