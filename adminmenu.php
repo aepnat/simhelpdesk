@@ -9,13 +9,12 @@ $general->logged_out_protect();
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 	<link rel=stylesheet type="text/css" href="css/style.css">
 </head>
-<body bgcolor="#003566">
+<body bgcolor="#bb2a26">
 <div id="leftmenu">
 <div id="headleftmenu">Data Master</div>
 <ul>
   <li><a href="userlist.php" target="contentFrame">User List</a></li>
   <li><a href="customerlist.php" target="contentFrame">Customer List</a></li>
-  <li><a href="projectlist.php" target="contentFrame">Project Info</a></li>
 </ul>
 </div>
 <div id="leftmenu">
