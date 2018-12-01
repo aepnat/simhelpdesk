@@ -15,7 +15,6 @@ try {
     $users = new Users($db);
     $tickets = new Tickets($db);
     $slas = new SLA($db);
-    $emails = new Emails($db);
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }

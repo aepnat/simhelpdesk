@@ -19,34 +19,9 @@ if (isset($_POST['submit'])) {
     $ticketstatus = 'Assigned'; //ketika pertama kali dibuat, status="Assigned" ke salah satu teknisi
     $assignee = $_POST['idassignee'];
     $pro = $_POST['pro'];
-    $user_assignee = $users->userdata($assignee);
-    $email_assignee = $user_assignee['email'];
     $changes = 'Create New Ticket';
-    $emailcc = '';
-    $emailbcc = '';
-    $fullname_assignee = $user_assignee['fullname'];
-    if ($sla == '1') {
-        $managers = $users->get_user_by_level('Manager');
-        $i = 0;
-        foreach ($managers as $manager) {
-            $manageremail[$i] = $manager['email'];
-            $emailcc .= $manageremail[$i].', ';
-            $i++;
-        }
-    }
-    $emailstatus = 'New';
-    $senddate = time();
     $datasla = $slas->sla_data($sla);
     $resolutiontime = $datasla['resolutiontime'];
-    $slasenddate = strtotime("+$resolutiontime hours", $senddate);
-    $emailsubject = "Ticket No: $ticketnumber has assigned to you";
-    $message =
-"Dear $fullname_assignee, \r\n
-You are currently assign for this ticket.\r\n
-Please follow this link to resolved the ticket --> http://localhost/helpdesk/ticketedit.php?id=$id"." \r\n
-Thank you. \r\n
-Regards, \r\n
-Helpdesk";
     $tickets->add_ticket($ticketnumber, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $documentedby, $pro);
     $assigneddate = '';
     $pendingby = '';
@@ -57,9 +32,6 @@ Helpdesk";
     $closedby = '';
     $closeddate = '';
     $tickets->log_tickets($id, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $assigneddate, $pendingby, $pendingdate, $resolution, $resolvedby, $resolveddate, $closedby, $closeddate, $changes, $changeby);
-    // $emails->add_email($id, $senddate, $email_assignee, $emailcc, $emailbcc, $emailsubject, $message, $emailstatus);
-    // $emails->add_sla_remainder($id, $ticketnumber, $slasenddate, $email_assignee, $emailcc, $emailbcc, $emailsubject, $message);
-    // $result = $emails->send_new_ticket();
     header("Location: ticketread.php?id=$id");
 }
 ?>
