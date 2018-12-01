@@ -13,7 +13,6 @@ spl_autoload_register('my_autoload');
 try {
     $general = new General();
     $users = new Users($db);
-    $customers = new Customers($db);
     $projects = new Projects($db);
     $tickets = new Tickets($db);
     $hdnews = new HDNews($db);

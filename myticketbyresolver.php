@@ -41,7 +41,6 @@ $tickets_count = count($tickets);
         <tr>
             <th>Ticket No.</th>
 			<th>Urgency</th>
-            <th>Customer</th>
             <th>Reported Date</th>
 			<th>Reported By</th>
             <th>Problem Summary</th>
@@ -53,11 +52,9 @@ $tickets_count = count($tickets);
 		<?php 
         foreach ($tickets as $ticket) {
             $sla = $slas->sla_data($ticket['sla']);
-            $customer = $customers->customer_data($ticket['idcustomer']);
             $user = $users->userdata($ticket['assignee']);
             echo '<tr><td><a href=ticketedit.php?id='.$ticket['id'].'>'.$ticket['ticketnumber'].'</a></td>'.
                  '<td>'.$sla['namasla'].'</td>'.
-                 '<td>'.$customer['namacustomer'].'</td>'.
                  '<td>'.date('d-M-Y', $ticket['reporteddate']).'</td>'.
                  '<td>'.$ticket['reportedby'].'</td>'.
                  '<td>'.$ticket['problemsummary'].'</td>'.

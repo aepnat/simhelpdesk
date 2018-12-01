@@ -10,7 +10,6 @@ if (isset($_POST['submit'])) {
     $id = $lastticket['id'] + 1;
     $ticketnumber = $id.'/SR/'.date('M').'/'.date('Y'); //format nomor tiket
     $sla = $_POST['sla'];
-    //$idcustomer		= $_POST['idcustomer'];
     $reporteddate = strtotime($_POST['reporteddate']);
     $reportedby = $_POST['reportedby'];
     $telp = $_POST['telp'];

@@ -121,36 +121,6 @@ if (isset($_POST['submit'])) {
 	<fieldset style="display: inline-block;">
 	<?php echo '<legend> Ticket No: '.$ticket['ticketnumber'].'</legend>'; ?>
 	<div class="breadcrumb">*) Field Required</div> 
-	<!--<table class="formtable">
-		<tr>
-			<td width="120"> Customer </td><td> : </td>
-			<td> 
-			<?php 
-                $customer = $customers->customer_data($ticket['idcustomer']);
-                echo $customer['namacustomer'];
-            ?> </td>
-		</tr>
-		<tr>
-			<td> Customer Product</td><td> : </td>
-			<td> <?php echo $customer['customerproduct']; ?> </td>
-		</tr>
-		<tr>
-			<td> Warranty Period</td><td> : </td>
-			<td> 
-			<?php 
-                $project = $projects->get_project_customer($customer['idcustomer']);
-                echo $project['warrantyperiod'].' Year';
-            ?> </td>
-		</tr>
-		<tr>
-			<td> Contract Period</td><td> : </td>
-			<td>
-			<?php
-                echo $project['contractperiod'].' Month';
-            ?>
-			</td>
-		</tr>
-	</table>-->
 	<br/>
 	<table class="formtable">
 		<tr>

@@ -60,7 +60,6 @@ $currenttime = time();
             <th>Ticket No.</th>
 			<th>Urgency</th>
 			<th>SLA Goal Time</th>
-            <th>Customer</th>
             <th>Reported Date</th>
 			<th>Documented Date</th>
             <th>Problem Summary</th>
@@ -88,12 +87,10 @@ $currenttime = time();
                 $slabgcolor = '#00FF00';
                 $slatxtcolor = '#000000';
             }
-            $customer = $customers->customer_data($ticket['idcustomer']);
             $user = $users->userdata($ticket['assignee']);
             echo '<tr><td><a href=ticketedit.php?id='.$ticket['id'].'>'.$ticket['ticketnumber'].'</a></td>'.
                  '<td style="background-color:'.$slabgcolor.';color:'.$slatxtcolor.';">'.$sla['namasla'].'</td>'.
                  '<td>'.date('d-M-Y H:i:s', $slagoaltime).'</td>'.
-                 '<td>'.$customer['namacustomer'].'</td>'.
                  '<td>'.date('d-M-Y H:i:s', $ticket['reporteddate']).'</td>'.
                  '<td>'.date('d-M-Y H:i:s', $ticket['documenteddate']).'</td>'.
                  '<td>'.$ticket['problemsummary'].'</td>'.

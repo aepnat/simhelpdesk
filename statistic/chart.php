@@ -4,14 +4,11 @@ $general->logged_out_protect();
 //$user = $users->userdata($_SESSION['id']);
 //if($user['level'] != "Manager")
 //{ 	exit("You don't have permission to access this page!"); }
-$ticket_list = $tickets->count_tickets_by_customer();
+$ticket_list = array();
 $i = 0; $color[0] = 'FF0000'; $color[1] = '00FF00'; $color[2] = 'FFFF00'; $color[3] = '0000FF'; $color[4] = 'FF00FF';
 foreach ($ticket_list as $ticket) {
-    $customer = $customers->customer_data($ticket['idcustomer']);
-    //$datachart .= "<set value='$ticket[total]' name='$customer[namacustomer]' color='$color[$i]' />";
-    //$datachart1 = htmlspecialchars($datachart);
     @$value .= $ticket['total'].'#';
-    @$name .= $customer['namacustomer'].'#';
+    @$name .= '#';
     //echo $value[i].'<br>'.$name[i].'<br>';
     //$color[$i++];
 }
@@ -19,9 +16,7 @@ $arr_value = explode('#', $value);
 $arr_name = explode('#', $name);
 //echo $arr_name[0].$arr_name[1].$arr_name[2].$arr_name[3].$arr_name[4];
 $ticket_list2 = $tickets->count_tickets_by_status();
-foreach ($ticket_list2 as $ticket2) {	//$customer2  = $customers->customer_data($ticket2['idcustomer']);
-    //$datachart .= "<set value='$ticket[total]' name='$customer[namacustomer]' color='$color[$i]' />";
-    //$datachart1 = htmlspecialchars($datachart);
+foreach ($ticket_list2 as $ticket2) {
     @$value2 .= $ticket2['total'].'#';
     @$name2 .= $ticket2['ticketstatus'].'#';
     //echo $value[i].'<br>'.$name[i].'<br>';

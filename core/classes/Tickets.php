@@ -35,7 +35,6 @@ class Tickets
         $query = $this->db->prepare($querystring);
         $query->bindValue(1, $ticketnumber);
         $query->bindValue(2, $sla);
-        //$query->bindValue(3, $idcustomer);
         $query->bindValue(3, $reporteddate);
         $query->bindValue(4, $reportedby);
         $query->bindValue(5, $telp);
@@ -227,19 +226,6 @@ class Tickets
         $query = $this->db->prepare("SELECT * FROM `tickets` WHERE `documenteddate` >= ? AND `documenteddate` <= ? AND `ticketstatus` = 'Closed' ORDER BY `documenteddate` DESC");
         $query->bindValue(1, $fromperiod);
         $query->bindValue(2, $toperiod);
-
-        try {
-            $query->execute();
-        } catch (PDOException $e) {
-            die($e->getMessage());
-        }
-
-        return $query->fetchAll();
-    }
-
-    public function count_tickets_by_customer()
-    {
-        $query = $this->db->prepare('SELECT `idcustomer`, count(*) as `total` FROM `tickets` GROUP BY `idcustomer` ORDER BY total DESC LIMIT 5');
 
         try {
             $query->execute();

@@ -8,10 +8,9 @@ $general->logged_out_protect();
 $tickets = $tickets->get_tickets();
 $json = '[';
 foreach ($tickets as $ticket) {
-    $customer = $customers->customer_data($ticket['idcustomer']);
     $userassignee = $users->userdata($ticket['assignee']);
-    $json .= '{"Product": "'.$customer['customerproduct'].'",'.
-    '"Company": "'.$customer['namacustomer'].'",'.
+    $json .= '{"Product": "",'.
+    '"Company": "",'.
     '"Assignee": "'.$userassignee['fullname'].'",'.
     '"Status": "'.$ticket['ticketstatus'].'"},';
 }
