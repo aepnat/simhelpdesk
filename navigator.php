@@ -16,18 +16,11 @@ $user = $users->userdata($_SESSION['loginid']);
 <ul>
 	<?php if ($user['level'] == 'User'):?>
 		<li><a href="myticketbyrequester.php" target="contentFrame">My Request</a></li>
-	<?php endif;?>
+	<?php endif; ?>
   <li><a href="myticketbyassignee.php" target="contentFrame">My Assignment</a></li>
   <li><a href="myticketbyresolver.php" target="contentFrame">My Resolution</a></li>
   <li><a href="myticketwaitforclosed.php" target="contentFrame">Waiting for Close</a></li>
   <li><a href="ticketlistuser.php" target="contentFrame">View All Opened Tickets</a></li>
-</ul>
-</div>
-<div id="leftmenu">
-<div id="headleftmenu">Knowledge Base</div>
-<ul>
-  <li><a href="searchticket.php" target="contentFrame">Search Ticket</a></li>
-  <li><a href="popularsolution.php" target="contentFrame">Popular Solution</a></li>
 </ul>
 </div>
 <?php

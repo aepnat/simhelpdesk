@@ -1,8 +1,8 @@
 <?php 
 require 'core/init.php';
 $general->logged_out_protect();
-$user 		= $users->userdata($_SESSION['loginid']);
-$fullname 	= ucwords(strtolower($user['fullname']));
+$user = $users->userdata($_SESSION['loginid']);
+$fullname = ucwords(strtolower($user['fullname']));
 ?> 
 <!DOCTYPE HTML>
 <html>
@@ -25,10 +25,10 @@ $fullname 	= ucwords(strtolower($user['fullname']));
 	<li class='active'><a href='home.php' target="_parent"><span>Home</span></a></li>
 	<?php if ($user['level'] == 'User'):?>
 		<li><a href='ticketnew.php' target="contentFrame"><span>New Ticket</span></a></li>
-	<?php endif;?>
+	<?php endif; ?>
 	<?php if ($user['level'] == 'Admin'):?>
 		<li><a href='adminmenu.php' target="leftFrame"><span>Admin</span></a></li>
-	<?php endif;?>
+	<?php endif; ?>
 	<li><a href='changepwd.php' target="contentFrame"><span>Change Password</span></a></li>
 	<li class='last'><a href='logout.php' target="_parent"><span>Logout</span></a></li>
 </ul>
