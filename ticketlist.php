@@ -2,14 +2,16 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $user = $users->userdata($_SESSION['loginid']);
-if($user['level'] == "Admin" || $user['level'] == "Manager")
-{$akses=true;}
-else 
-{$akses=false;}
-if ($akses=False)
-{exit("You don't have permission to access this page!");}
-$ticket_list 		= $tickets->get_tickets();
-$tickets_count 	= count($ticket_list);
+if ($user['level'] == 'Admin' || $user['level'] == 'Manager') {
+    $akses = true;
+} else {
+    $akses = false;
+}
+if ($akses = false) {
+    exit("You don't have permission to access this page!");
+}
+$ticket_list = $tickets->get_tickets();
+$tickets_count = count($ticket_list);
 $currenttime = time();
 ?>
 <!DOCTYPE HTML>
@@ -69,32 +71,37 @@ $currenttime = time();
     </thead>
     <tbody>
 		<?php 
-		foreach ($ticket_list as $ticket) {
-			$sla = $slas->sla_data($ticket['sla']);
-			$documenteddate=$ticket['documenteddate'];
-			$resolutiontime=$sla['resolutiontime'];
-			$slawarning=$sla['slawarning'];
-			$slagoaltime=strtotime("+$resolutiontime hours",$documenteddate);
-			$slawarningtime=strtotime("+$slawarning hours",$documenteddate);
-			if ($currenttime > $slagoaltime)
-			{$slabgcolor="#FF0000";$slatxtcolor="#ffffff";}
-			else if ($currenttime >= $slawarningtime)
-			{$slabgcolor="#FFFF00";$slatxtcolor="#000000";}
-			else {$slabgcolor="#00FF00";$slatxtcolor="#000000";}
-			$customer = $customers->customer_data($ticket['idcustomer']);
-			$user = $users->userdata($ticket['assignee']);
-			echo '<tr><td><a href=ticketedit.php?id='.$ticket['id']. '>'.$ticket['ticketnumber'].'</a></td>'.
-				 '<td style="background-color:'.$slabgcolor.';color:'.$slatxtcolor.';">'.$sla['namasla'].'</td>'.
-				 '<td>'.date('d-M-Y H:i:s',$slagoaltime).'</td>'.
-				 '<td>'.$customer['namacustomer'].'</td>'.
-				 '<td>'.date('d-M-Y H:i:s',$ticket['reporteddate']).'</td>'.
-				 '<td>'.date('d-M-Y H:i:s',$ticket['documenteddate']).'</td>'.
-				 '<td>'.$ticket['problemsummary'].'</td>'.
-				 '<td>'.$ticket['ticketstatus'].'</td>'.
-				 '<td>'.$user['fullname'].'</td>'.
-				 '<td><a href=ticketdel.php?id='.$ticket['id']. ' onclick="return delete_confirm();">del</a></td></tr>';
-		}
-		?>
+        foreach ($ticket_list as $ticket) {
+            $sla = $slas->sla_data($ticket['sla']);
+            $documenteddate = $ticket['documenteddate'];
+            $resolutiontime = $sla['resolutiontime'];
+            $slawarning = $sla['slawarning'];
+            $slagoaltime = strtotime("+$resolutiontime hours", $documenteddate);
+            $slawarningtime = strtotime("+$slawarning hours", $documenteddate);
+            if ($currenttime > $slagoaltime) {
+                $slabgcolor = '#FF0000';
+                $slatxtcolor = '#ffffff';
+            } elseif ($currenttime >= $slawarningtime) {
+                $slabgcolor = '#FFFF00';
+                $slatxtcolor = '#000000';
+            } else {
+                $slabgcolor = '#00FF00';
+                $slatxtcolor = '#000000';
+            }
+            $customer = $customers->customer_data($ticket['idcustomer']);
+            $user = $users->userdata($ticket['assignee']);
+            echo '<tr><td><a href=ticketedit.php?id='.$ticket['id'].'>'.$ticket['ticketnumber'].'</a></td>'.
+                 '<td style="background-color:'.$slabgcolor.';color:'.$slatxtcolor.';">'.$sla['namasla'].'</td>'.
+                 '<td>'.date('d-M-Y H:i:s', $slagoaltime).'</td>'.
+                 '<td>'.$customer['namacustomer'].'</td>'.
+                 '<td>'.date('d-M-Y H:i:s', $ticket['reporteddate']).'</td>'.
+                 '<td>'.date('d-M-Y H:i:s', $ticket['documenteddate']).'</td>'.
+                 '<td>'.$ticket['problemsummary'].'</td>'.
+                 '<td>'.$ticket['ticketstatus'].'</td>'.
+                 '<td>'.$user['fullname'].'</td>'.
+                 '<td><a href=ticketdel.php?id='.$ticket['id'].' onclick="return delete_confirm();">del</a></td></tr>';
+        }
+        ?>
     </tbody>
 	</table>
 	<p>&nbsp;</p>

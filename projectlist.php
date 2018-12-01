@@ -2,9 +2,10 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $user = $users->userdata($_SESSION['loginid']);
-if($user['level'] != "Admin")
-{ 	exit("You don't have permission to access this page!"); }
-$projects 		= $projects->get_projects();
+if ($user['level'] != 'Admin') {
+    exit("You don't have permission to access this page!");
+}
+$projects = $projects->get_projects();
 $projects_count = count($projects);
 ?>
 <!DOCTYPE HTML>
@@ -66,25 +67,25 @@ $projects_count = count($projects);
     </thead>
     <tbody>
 		<?php 
-		foreach ($projects as $project) {
-			$customer=$customers->customer_data($project['idcustomer']);
-			$disp_id_project=sprintf("%04s", $project['projectid']);
-			echo '<tr><td><a href=projectedit.php?id='.$project['projectid']. '>'.$disp_id_project.'</a></td>'.
-				 '<td>'.$customer['namacustomer'].'</td>'.
-				 '<td>'.date('d-M-Y',$project['deliverybegin']).'</td>'.
-				 '<td>'.date('d-M-Y',$project['deliveryend']).'</td>'.
-				 '<td>'.date('d-M-Y',$project['installbegin']).'</td>'.
-				 '<td>'.date('d-M-Y',$project['installend']).'</td>'.
-				 '<td>'.date('d-M-Y',$project['uatbegin']).'</td>'.
-				 '<td>'.date('d-M-Y',$project['uatend']).'</td>'.
-				 '<td>'.date('d-M-Y',$project['billstartdate']).'</td>'.
-				 '<td>'.date('d-M-Y',$project['billduedate']).'</td>'.
-				 '<td>'.$project['warrantyperiod'].' Year</td>'.
-				 '<td>'.date('d-M-Y',$project['contractstartdate']).'</td>'.
-				 '<td>'.$project['contractperiod'].' Month</td>'.
-				 '<td><a href=projectdel.php?id='.$project['projectid']. ' onclick="return delete_confirm();">del</a></td></tr>';
-		}
-		?>
+        foreach ($projects as $project) {
+            $customer = $customers->customer_data($project['idcustomer']);
+            $disp_id_project = sprintf('%04s', $project['projectid']);
+            echo '<tr><td><a href=projectedit.php?id='.$project['projectid'].'>'.$disp_id_project.'</a></td>'.
+                 '<td>'.$customer['namacustomer'].'</td>'.
+                 '<td>'.date('d-M-Y', $project['deliverybegin']).'</td>'.
+                 '<td>'.date('d-M-Y', $project['deliveryend']).'</td>'.
+                 '<td>'.date('d-M-Y', $project['installbegin']).'</td>'.
+                 '<td>'.date('d-M-Y', $project['installend']).'</td>'.
+                 '<td>'.date('d-M-Y', $project['uatbegin']).'</td>'.
+                 '<td>'.date('d-M-Y', $project['uatend']).'</td>'.
+                 '<td>'.date('d-M-Y', $project['billstartdate']).'</td>'.
+                 '<td>'.date('d-M-Y', $project['billduedate']).'</td>'.
+                 '<td>'.$project['warrantyperiod'].' Year</td>'.
+                 '<td>'.date('d-M-Y', $project['contractstartdate']).'</td>'.
+                 '<td>'.$project['contractperiod'].' Month</td>'.
+                 '<td><a href=projectdel.php?id='.$project['projectid'].' onclick="return delete_confirm();">del</a></td></tr>';
+        }
+        ?>
     </tbody>
 	</table>
 	<p>&nbsp;</p>

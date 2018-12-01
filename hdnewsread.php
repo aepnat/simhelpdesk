@@ -1,7 +1,7 @@
 <?php 
 require 'core/init.php';
 $general->logged_out_protect();
-$id	= $_GET['id'];
+$id = $_GET['id'];
 $news = $hdnews->news_data($id);
 ?>
 <!DOCTYPE HTML>
@@ -22,11 +22,11 @@ $news = $hdnews->news_data($id);
 	<p style="font-family:arial;color:red;font-size:16px;">Helpdesk Breaking News</p>
 	<table class="formtable">
 	<?php
-		echo '<tr><td> From :'.$news['createdby']. '</td></tr>'.
-			 '<tr><td>'. date('d-M-Y',$news['createdon']) .'</td></tr>'.
-			 '<tr><td><p style="font-family:arial;color:black;font-size:20px;">'.$news['title'].'</p></td></tr>'.
-			 '<tr><td><p style="font-family:arial;color:black;font-size:14px;">'.nl2br($news['detail']).'</p></td></tr>';
-	?>
+        echo '<tr><td> From :'.$news['createdby'].'</td></tr>'.
+             '<tr><td>'.date('d-M-Y', $news['createdon']).'</td></tr>'.
+             '<tr><td><p style="font-family:arial;color:black;font-size:20px;">'.$news['title'].'</p></td></tr>'.
+             '<tr><td><p style="font-family:arial;color:black;font-size:14px;">'.nl2br($news['detail']).'</p></td></tr>';
+    ?>
 	</table>
 </body>
 </html>

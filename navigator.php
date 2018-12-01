@@ -1,7 +1,7 @@
 <?php 
 require 'core/init.php';
 $general->logged_out_protect();
-$user 		= $users->userdata($_SESSION['loginid']);
+$user = $users->userdata($_SESSION['loginid']);
 ?> 
 <!DOCTYPE HTML>
 <html>
@@ -29,15 +29,15 @@ $user 		= $users->userdata($_SESSION['loginid']);
 </ul>
 </div>
 <?php
-	if ($user['level'] == "Manager" || $user['level'] == "Admin")
-	{	echo '<div id="leftmenu">
+    if ($user['level'] == 'Manager' || $user['level'] == 'Admin') {
+        echo '<div id="leftmenu">
 				<div id="headleftmenu">Helpdesk Statistic</div>
 					<ul>
 					<li><a href="pivot/hdpivot.php" target="contentFrame">Pivot Table</a></li>
 					<li><a href="statistic/chart.php" target="contentFrame">SLA Chart</a></li>
 					</ul>
-			 </div>'; 
-	}
+			 </div>';
+    }
 ?>
 </body>
 </html>

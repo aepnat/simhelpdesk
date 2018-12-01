@@ -2,8 +2,8 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $user = $users->userdata($_SESSION['loginid']);
-$tickets 		= $tickets->get_tickets_by_status("Closed");
-$tickets_count 	= count($tickets);
+$tickets = $tickets->get_tickets_by_status('Closed');
+$tickets_count = count($tickets);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -49,17 +49,17 @@ $tickets_count 	= count($tickets);
     </thead>
     <tbody>
 		<?php 
-		foreach ($tickets as $ticket) {
-			$sla = $slas->sla_data($ticket['sla']);
-			$customer = $customers->customer_data($ticket['idcustomer']);
-			echo '<tr><td>'.$customer['namacustomer'].'</td>'.
-				 '<td>'.date('d-M-Y',$ticket['reporteddate']).'</td>'.
-				 '<td>'.$ticket['problemsummary'].'</td>'.
-				 '<td>'.$ticket['problemdetail'].'</td>'.
-				 '<td>'.$ticket['resolution'].'</td>'.
-				 '<td>'.$ticket['resolvedby'].'</td></tr>';
-		}
-		?>
+        foreach ($tickets as $ticket) {
+            $sla = $slas->sla_data($ticket['sla']);
+            $customer = $customers->customer_data($ticket['idcustomer']);
+            echo '<tr><td>'.$customer['namacustomer'].'</td>'.
+                 '<td>'.date('d-M-Y', $ticket['reporteddate']).'</td>'.
+                 '<td>'.$ticket['problemsummary'].'</td>'.
+                 '<td>'.$ticket['problemdetail'].'</td>'.
+                 '<td>'.$ticket['resolution'].'</td>'.
+                 '<td>'.$ticket['resolvedby'].'</td></tr>';
+        }
+        ?>
     </tbody>
 	</table>
 	<p>&nbsp;</p>

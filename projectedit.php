@@ -1,30 +1,30 @@
 <?php 
 require 'core/init.php';
 $general->logged_out_protect();
-$projectid	= $_GET['id'];
-$project	= $projects->project_data($projectid);
-$idcustomer	= $project['idcustomer'];
-$cust=$customers->customer_data($idcustomer);
-if (isset($_POST['submit']))
-{	$deliverybegin 	= strtotime($_POST['deliverybegin']);
-	$deliveryend 	= strtotime($_POST['deliveryend']);
-	
-	$installbegin 	= strtotime($_POST['installbegin']);
-	$installend 	= strtotime($_POST['installend']);
-	
-	$uatbegin 	= strtotime($_POST['uatbegin']);
-	$uatend 	= strtotime($_POST['uatend']);
-	
-	$billstartdate 	= strtotime($_POST['billstartdate']);
-	$billduedate 	= strtotime($_POST['billduedate']);
-	
-	$warrantyperiod = $_POST['warrantyperiod'];
+$projectid = $_GET['id'];
+$project = $projects->project_data($projectid);
+$idcustomer = $project['idcustomer'];
+$cust = $customers->customer_data($idcustomer);
+if (isset($_POST['submit'])) {
+    $deliverybegin = strtotime($_POST['deliverybegin']);
+    $deliveryend = strtotime($_POST['deliveryend']);
 
-	$contractstartdate 	= strtotime($_POST['contractstartdate']);
-	$contractperiod = $_POST['contractperiod'];
-	
-	$projects->update_project($projectid,$projectname,$idcustomer,$deliverybegin,$deliveryend,$installbegin,$installend,$uatbegin,$uatend,$billstartdate,$billduedate,$warrantyperiod,$contractstartdate,$contractperiod);
-	header('location: projectlist.php?');
+    $installbegin = strtotime($_POST['installbegin']);
+    $installend = strtotime($_POST['installend']);
+
+    $uatbegin = strtotime($_POST['uatbegin']);
+    $uatend = strtotime($_POST['uatend']);
+
+    $billstartdate = strtotime($_POST['billstartdate']);
+    $billduedate = strtotime($_POST['billduedate']);
+
+    $warrantyperiod = $_POST['warrantyperiod'];
+
+    $contractstartdate = strtotime($_POST['contractstartdate']);
+    $contractperiod = $_POST['contractperiod'];
+
+    $projects->update_project($projectid, $projectname, $idcustomer, $deliverybegin, $deliveryend, $installbegin, $installend, $uatbegin, $uatend, $billstartdate, $billduedate, $warrantyperiod, $contractstartdate, $contractperiod);
+    header('location: projectlist.php?');
 }
 ?>
 <!DOCTYPE HTML>
@@ -68,7 +68,7 @@ if (isset($_POST['submit']))
 	<table class="formtable">
 		<tr>
 			<td width="100"> Project ID : </td>
-			<?php $disp_id_project=sprintf("%04s", $project['projectid']); ?>
+			<?php $disp_id_project = sprintf('%04s', $project['projectid']); ?>
 			<td> <input type='text' size='10' name='projectid' value='<?php echo $disp_id_project; ?>' disabled /> </td>
 		</tr>
 		<tr class="border-bottom">
@@ -80,48 +80,47 @@ if (isset($_POST['submit']))
 			<td> <select name="idcustomer">
 					<option value='<?php echo $project['idcustomer']; ?>' selected="selected"> <?php echo $cust['namacustomer']; ?> </option>
 				<?php
-					$customers = $customers->get_customers();
-					foreach ($customers as $customerval)
-					{	
-						echo '<option value=' . $customerval['idcustomer'] . '>' .  $customerval['namacustomer'] . '</option>';
-					}
-				?>
+                    $customers = $customers->get_customers();
+                    foreach ($customers as $customerval) {
+                        echo '<option value='.$customerval['idcustomer'].'>'.$customerval['namacustomer'].'</option>';
+                    }
+                ?>
 				</select></td>
 		</tr>
 	</table><br/>
 	<table class="formtable"> 	
 		<tr>
 			<td width="100"> Delivery Date : </td>
-			<td><input type="text" id="deliverybegin" name="deliverybegin" value="<?php echo date('j-M-Y', $project['deliverybegin']);?>" readonly="readonly"> 
+			<td><input type="text" id="deliverybegin" name="deliverybegin" value="<?php echo date('j-M-Y', $project['deliverybegin']); ?>" readonly="readonly"> 
 				&nbsp;&nbsp; Until :&nbsp;&nbsp;
-				<input type="text" id="deliveryend" name="deliveryend" value="<?php echo date('j-M-Y', $project['deliveryend']);?>" readonly="readonly"> 
+				<input type="text" id="deliveryend" name="deliveryend" value="<?php echo date('j-M-Y', $project['deliveryend']); ?>" readonly="readonly"> 
 			</td>
 		</tr>
 	</table><br/>
 	<table class="formtable">
 		<tr align="left">
 			<td width="100"> Install Date : </td>
-			<td><input type="text" id="installbegin" name="installbegin" value="<?php echo date('j-M-Y', $project['installbegin']);?>" readonly="readonly"> 
+			<td><input type="text" id="installbegin" name="installbegin" value="<?php echo date('j-M-Y', $project['installbegin']); ?>" readonly="readonly"> 
 				&nbsp;&nbsp; Until :&nbsp;&nbsp;
-				<input type="text" id="installend" name="installend" value="<?php echo date('j-M-Y', $project['installend']);?>" readonly="readonly"> 
+				<input type="text" id="installend" name="installend" value="<?php echo date('j-M-Y', $project['installend']); ?>" readonly="readonly"> 
 			</td>
 		</tr>
 	</table><br/>
 	<table class="formtable">
 		<tr align="left">
 			<td width="100"> UAT Date : </td>
-			<td><input type="text" id="uatbegin" name="uatbegin" value="<?php echo date('j-M-Y', $project['uatbegin']);?>" readonly="readonly"> 
+			<td><input type="text" id="uatbegin" name="uatbegin" value="<?php echo date('j-M-Y', $project['uatbegin']); ?>" readonly="readonly"> 
 				&nbsp;&nbsp; Until :&nbsp;&nbsp;
-				<input type="text" id="uatend" name="uatend" value="<?php echo date('j-M-Y', $project['uatend']);?>" readonly="readonly">
+				<input type="text" id="uatend" name="uatend" value="<?php echo date('j-M-Y', $project['uatend']); ?>" readonly="readonly">
 			</td>
 		</tr>
 	</table><br/>
 	<table class="formtable">
 		<tr align="left">
 			<td width="100"> Bill Date : </td>
-			<td><input type="text" id="billstartdate" name="billstartdate" value="<?php echo date('j-M-Y', $project['billstartdate']);?>" readonly="readonly"> 
+			<td><input type="text" id="billstartdate" name="billstartdate" value="<?php echo date('j-M-Y', $project['billstartdate']); ?>" readonly="readonly"> 
 				&nbsp;&nbsp; Until :&nbsp;&nbsp;
-				<input type="text" id="billduedate" name="billduedate" value="<?php echo date('j-M-Y', $project['billduedate']);?>" readonly="readonly">
+				<input type="text" id="billduedate" name="billduedate" value="<?php echo date('j-M-Y', $project['billduedate']); ?>" readonly="readonly">
 			</td>
 		</tr>
 	</table><br/>
@@ -141,7 +140,7 @@ if (isset($_POST['submit']))
 	<table class="formtable">
 		<tr>
 			<td width="100">Contract Start Date : </td>
-			<td><input type="text" id="contractstartdate" name="contractstartdate" value="<?php echo date('j-M-Y', $project['contractstartdate']);?>" readonly="readonly"> 
+			<td><input type="text" id="contractstartdate" name="contractstartdate" value="<?php echo date('j-M-Y', $project['contractstartdate']); ?>" readonly="readonly"> 
 				&nbsp;&nbsp; Contract Period : &nbsp;&nbsp; 
 				<select name="contractperiod">
 				<option value='<?php echo $project['contractperiod']; ?>' selected="selected"> <?php echo $project['contractperiod']; ?> </option>
@@ -164,9 +163,9 @@ if (isset($_POST['submit']))
 	</form>
 
 	<?php 
-	if(empty($errors) === false){
-		echo '<p class=errormsg>' . implode('</p><p class=errormsg>', $errors) . '</p>';
-	}
-	?>
+    if (empty($errors) === false) {
+        echo '<p class=errormsg>'.implode('</p><p class=errormsg>', $errors).'</p>';
+    }
+    ?>
 </body>
 </html>

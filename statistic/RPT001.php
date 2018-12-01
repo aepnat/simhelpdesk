@@ -105,14 +105,14 @@ $general->logged_out_protect();
 		</thead>
 		<tbody>
 			<?php 
-			$news = $hdnews->get_headline_news();
-			foreach ($news as $thenews)
-			{	echo '<tr><td>Budi</td>'.
-					 '<td>3</td>'.
-					 '<td>5</td>',
-					 '<td>7</td></tr>';
-			}
-			?>
+            $news = $hdnews->get_headline_news();
+            foreach ($news as $thenews) {
+                echo '<tr><td>Budi</td>'.
+                     '<td>3</td>'.
+                     '<td>5</td>',
+                     '<td>7</td></tr>';
+            }
+            ?>
 		</tbody>
 	</table>
 	

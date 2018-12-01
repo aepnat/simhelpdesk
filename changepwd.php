@@ -1,19 +1,19 @@
 <?php 
 require 'core/init.php';
 $general->logged_out_protect();
-$user 	= $users->userdata($_SESSION['loginid']);
-$userid	= $user['id'];
-if (isset($_POST['submit']))
-{	$oldpassword 	= sha1($_POST['oldpassword']);
-	$userpassword	= $user['password'];
-	if ($oldpassword != $userpassword)
-	{	$errors[] = 'The old password does not match!';	
-	}else
-	{	$newpassword1 	= $_POST['newpassword1'];
-		$users->changepwd($userid,$newpassword1);
-		$users->log_users($_SESSION['loginid'],"Change the old password");
-		header('Location: changepwd.php?success');
-	}
+$user = $users->userdata($_SESSION['loginid']);
+$userid = $user['id'];
+if (isset($_POST['submit'])) {
+    $oldpassword = sha1($_POST['oldpassword']);
+    $userpassword = $user['password'];
+    if ($oldpassword != $userpassword) {
+        $errors[] = 'The old password does not match!';
+    } else {
+        $newpassword1 = $_POST['newpassword1'];
+        $users->changepwd($userid, $newpassword1);
+        $users->log_users($_SESSION['loginid'], 'Change the old password');
+        header('Location: changepwd.php?success');
+    }
 }
 ?>
 <!DOCTYPE HTML>
@@ -73,12 +73,12 @@ if (isset($_POST['submit']))
 	</form>
 	<br/>
 	<?php
-	if(empty($errors) === false){
-		echo '<p class=errormsg>' . implode('</p><p class=errormsg>', $errors) . '</p>';
-	}
-	if (isset($_GET['success']) && empty($_GET['success'])) {
-		echo 'Your password has been changed. Please logout and relogin with the new password.';
-	}
-	?>
+    if (empty($errors) === false) {
+        echo '<p class=errormsg>'.implode('</p><p class=errormsg>', $errors).'</p>';
+    }
+    if (isset($_GET['success']) && empty($_GET['success'])) {
+        echo 'Your password has been changed. Please logout and relogin with the new password.';
+    }
+    ?>
 </body>
 </html>

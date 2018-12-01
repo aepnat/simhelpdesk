@@ -2,53 +2,54 @@
 require 'core/init.php';
 $general->logged_out_protect();
 $changeby = $_SESSION['loginid'];
-$user 	= $users->userdata($_SESSION['loginid']);
-$id		= $_GET['id'];
-$ticket	= $tickets->ticket_data($id);
-if ($ticket['ticketstatus']=="Closed")
-{	header("Location: ticketread.php?id=$id");
-	exit();
+$user = $users->userdata($_SESSION['loginid']);
+$id = $_GET['id'];
+$ticket = $tickets->ticket_data($id);
+if ($ticket['ticketstatus'] == 'Closed') {
+    header("Location: ticketread.php?id=$id");
+    exit();
 }
-if (isset($_POST['submit']))
-{	$sla 			= $_POST['sla'];
-	$reporteddate 	= strtotime($_POST['reporteddate']);
-	$reportedby		= $_POST['reportedby'];
-	$telp 			= $_POST['telp'];
-	$email 			= $_POST['email'];
-	$problemsummary	= $_POST['problemsummary'];
-	$problemdetail	= $_POST['problemdetail'];
-	$assignee		= $_POST['idassignee'];
-	$type			= $_POST['pro'];
-	$ticketstatus	= $_POST['ticketstatus'];
-	$resolution		= $_POST['resolution'];
-	$pendingby		= $_POST['pendingby'];
-	$pendingdate 	= $_POST['pendingdate'];
-	$resolvedby		= $_POST['resolvedby'];
-	$resolveddate 	= $_POST['resolveddate'];
-	$closedby		= $_POST['closedby'];
-	$closeddate		= $_POST['closeddate'];
-	$changes		= "Re-assigned the ticket.";
-	if ($ticketstatus=="Pending")
-	{	$pendingby		= $user['username'];
-		$pendingdate 	= strtotime(now);
-		$changes		= "Change Status to Pending.";
-	}
-	if ($ticketstatus=="Resolved")
-	{	$resolvedby		= $user['username'];
-		$resolveddate 	= strtotime(now);
-		$changes		= "Change Status to Resolved.";
-	}
-	if ($ticketstatus=="Closed")
-	{	$closedby		= $user['username'];
-		$closeddate		= strtotime(now);
-		$changes		= "Change Status to Closed.";
-	}
-	$tickets->update_ticket($id,$sla,$reporteddate,$reportedby,$telp,$email,$problemsummary,$problemdetail,$ticketstatus,$assignee,$assigneddate,$pendingby, $pendingdate, $resolution,$resolvedby,$resolveddate,$closedby,$closeddate);
-	$tickets->log_tickets($id,$sla,$reporteddate,$reportedby,$telp,$email,$problemsummary,$problemdetail,$ticketstatus,$assignee,$assigneddate,$pendingby, $pendingdate, $resolution,$resolvedby,$resolveddate,$closedby,$closeddate,$changes,$changeby);
-	if ($user['level'] == "Admin")
-	{	header('Location: ticketlist.php');}
-	else
-	{	header('Location: myticketbyassignee.php');}
+if (isset($_POST['submit'])) {
+    $sla = $_POST['sla'];
+    $reporteddate = strtotime($_POST['reporteddate']);
+    $reportedby = $_POST['reportedby'];
+    $telp = $_POST['telp'];
+    $email = $_POST['email'];
+    $problemsummary = $_POST['problemsummary'];
+    $problemdetail = $_POST['problemdetail'];
+    $assignee = $_POST['idassignee'];
+    $type = $_POST['pro'];
+    $ticketstatus = $_POST['ticketstatus'];
+    $resolution = $_POST['resolution'];
+    $pendingby = $_POST['pendingby'];
+    $pendingdate = $_POST['pendingdate'];
+    $resolvedby = $_POST['resolvedby'];
+    $resolveddate = $_POST['resolveddate'];
+    $closedby = $_POST['closedby'];
+    $closeddate = $_POST['closeddate'];
+    $changes = 'Re-assigned the ticket.';
+    if ($ticketstatus == 'Pending') {
+        $pendingby = $user['username'];
+        $pendingdate = strtotime(now);
+        $changes = 'Change Status to Pending.';
+    }
+    if ($ticketstatus == 'Resolved') {
+        $resolvedby = $user['username'];
+        $resolveddate = strtotime(now);
+        $changes = 'Change Status to Resolved.';
+    }
+    if ($ticketstatus == 'Closed') {
+        $closedby = $user['username'];
+        $closeddate = strtotime(now);
+        $changes = 'Change Status to Closed.';
+    }
+    $tickets->update_ticket($id, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $assigneddate, $pendingby, $pendingdate, $resolution, $resolvedby, $resolveddate, $closedby, $closeddate);
+    $tickets->log_tickets($id, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $assigneddate, $pendingby, $pendingdate, $resolution, $resolvedby, $resolveddate, $closedby, $closeddate, $changes, $changeby);
+    if ($user['level'] == 'Admin') {
+        header('Location: ticketlist.php');
+    } else {
+        header('Location: myticketbyassignee.php');
+    }
 }
 ?>
 <!DOCTYPE HTML>
@@ -125,9 +126,9 @@ if (isset($_POST['submit']))
 			<td width="120"> Customer </td><td> : </td>
 			<td> 
 			<?php 
-				$customer=$customers->customer_data($ticket['idcustomer']);
-				echo $customer['namacustomer'];
-			?> </td>
+                $customer = $customers->customer_data($ticket['idcustomer']);
+                echo $customer['namacustomer'];
+            ?> </td>
 		</tr>
 		<tr>
 			<td> Customer Product</td><td> : </td>
@@ -137,16 +138,16 @@ if (isset($_POST['submit']))
 			<td> Warranty Period</td><td> : </td>
 			<td> 
 			<?php 
-				$project=$projects->get_project_customer($customer['idcustomer']);
-				echo $project['warrantyperiod'].' Year';
-			?> </td>
+                $project = $projects->get_project_customer($customer['idcustomer']);
+                echo $project['warrantyperiod'].' Year';
+            ?> </td>
 		</tr>
 		<tr>
 			<td> Contract Period</td><td> : </td>
 			<td>
 			<?php
-				echo $project['contractperiod'].' Month';
-			?>
+                echo $project['contractperiod'].' Month';
+            ?>
 			</td>
 		</tr>
 	</table>-->
@@ -160,7 +161,7 @@ if (isset($_POST['submit']))
 		</tr>
 		<tr>
 			<td> Reported Date*</td><td> : </td>
-			<td><input type="text" id="reporteddate" name="reporteddate" readonly="readonly" value="<?php echo date('d-M-Y',$ticket['reporteddate']); ?>"></td>
+			<td><input type="text" id="reporteddate" name="reporteddate" readonly="readonly" value="<?php echo date('d-M-Y', $ticket['reporteddate']); ?>"></td>
 		</tr>
 		<tr>
 			<td> Reported By* </td><td> : </td>
@@ -170,13 +171,13 @@ if (isset($_POST['submit']))
 			<td> Urgency (SLA)*</td><td> : </td>
 			<td><select name="sla">
 				<?php 
-					$sladata = $slas->sla_data($ticket['sla']);
-					echo '<option value="'.$ticket['sla'].'" selected="selected">'.$sladata['namasla'].'</option>';
-					$sla = $slas->get_sla();
-					foreach ($sla as $slaval) 
-					{	echo '<option value="'.$slaval['slaid'].'">'.$slaval['namasla'].'</option>';
-					}
-				?>
+                    $sladata = $slas->sla_data($ticket['sla']);
+                    echo '<option value="'.$ticket['sla'].'" selected="selected">'.$sladata['namasla'].'</option>';
+                    $sla = $slas->get_sla();
+                    foreach ($sla as $slaval) {
+                        echo '<option value="'.$slaval['slaid'].'">'.$slaval['namasla'].'</option>';
+                    }
+                ?>
 				</select>
 			</td>
 		</tr>
@@ -184,10 +185,10 @@ if (isset($_POST['submit']))
 			<td> Type</td><td> : </td>
 			<td>
 				<?php 
-					//$pro = $slas->get_sla();
-					echo $ticket['pro'];
-					
-				?>
+                    //$pro = $slas->get_sla();
+                    echo $ticket['pro'];
+
+                ?>
 				
 			</td>
 		</tr>
@@ -215,14 +216,13 @@ if (isset($_POST['submit']))
 			<td width="120"> Assign to* </td><td> : </td>
 			<td> <select name="idassignee">
 			<?php
-				$userassignee = $users->userdata($ticket['assignee']);
-				echo '<option value=' . $ticket['assignee']. ' selected="selected">'. $userassignee['fullname'] . '</option>';
-				$listusers = $users->get_users();
-				foreach ($listusers as $user)
-				{	
-					echo '<option value=' . $user['id'] . '>' .  $user['fullname'] . '</option>';
-				}
-			?>
+                $userassignee = $users->userdata($ticket['assignee']);
+                echo '<option value='.$ticket['assignee'].' selected="selected">'.$userassignee['fullname'].'</option>';
+                $listusers = $users->get_users();
+                foreach ($listusers as $user) {
+                    echo '<option value='.$user['id'].'>'.$user['fullname'].'</option>';
+                }
+            ?>
 			</select> </td>
 		</tr>
 		<tr>
@@ -230,8 +230,8 @@ if (isset($_POST['submit']))
 			<td> <input type="hidden" name="oldticketstatus" value="<?php echo $ticket['ticketstatus']; ?>"> 
 			<select name="ticketstatus">
 				<?php
-					echo '<option value=' . $ticket['ticketstatus']. ' selected="selected">'.  $ticket['ticketstatus'] . '</option>';
-				?>
+                    echo '<option value='.$ticket['ticketstatus'].' selected="selected">'.$ticket['ticketstatus'].'</option>';
+                ?>
 				<option value="Assigned"> Assigned </option>
 				<option value="Resolved"> Resolved </option>
 				<option value="Pending"> Pending </option>
@@ -269,14 +269,14 @@ if (isset($_POST['submit']))
 	<table class="formtable">
 	<tr bgcolor="#e0e0e0" ><td width="150">Updated On</td><td width="150">Updated By</td><td>Description</td></tr>
 	<?php
-		$list_log_tickets = $tickets->get_audit_trail($id);
-		foreach ($list_log_tickets as $log_ticket)
-		{	$changed_by = $users->userdata($log_ticket['changeby']);
-			echo '<tr><td>'.date('d-M-Y H:i:s',$log_ticket['changedate']).'</td>'.
-				 '<td>'.$changed_by['fullname'].'</td>'.
-				 '<td>'.$log_ticket['changes'].'</td></tr>';
-		}
-	?>
+        $list_log_tickets = $tickets->get_audit_trail($id);
+        foreach ($list_log_tickets as $log_ticket) {
+            $changed_by = $users->userdata($log_ticket['changeby']);
+            echo '<tr><td>'.date('d-M-Y H:i:s', $log_ticket['changedate']).'</td>'.
+                 '<td>'.$changed_by['fullname'].'</td>'.
+                 '<td>'.$log_ticket['changes'].'</td></tr>';
+        }
+    ?>
 	</table>
 	</fieldset>
 	<br/><br/>
