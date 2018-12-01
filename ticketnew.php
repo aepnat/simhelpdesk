@@ -57,12 +57,10 @@ Helpdesk";
     $closedby = '';
     $closeddate = '';
     $tickets->log_tickets($id, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $assigneddate, $pendingby, $pendingdate, $resolution, $resolvedby, $resolveddate, $closedby, $closeddate, $changes, $changeby);
-    $emails->add_email($id, $senddate, $email_assignee, $emailcc, $emailbcc, $emailsubject, $message, $emailstatus);
-    $emails->add_sla_remainder($id, $ticketnumber, $slasenddate, $email_assignee, $emailcc, $emailbcc, $emailsubject, $message);
-    $result = $emails->send_new_ticket();
-    //echo $result;
+    // $emails->add_email($id, $senddate, $email_assignee, $emailcc, $emailbcc, $emailsubject, $message, $emailstatus);
+    // $emails->add_sla_remainder($id, $ticketnumber, $slasenddate, $email_assignee, $emailcc, $emailbcc, $emailsubject, $message);
+    // $result = $emails->send_new_ticket();
     header("Location: ticketread.php?id=$id");
-    //echo $senddate."<br>".$resolutiontime."<br>".$slasenddate;
 }
 ?>
 <!DOCTYPE HTML>
@@ -85,37 +83,10 @@ Helpdesk";
 			$("#reporteddate").datepicker
 			({dateFormat:"dd-M-yy",changeMonth:true,changeYear:true,showOn:'button',
 			buttonImage:"images/calendar2.gif",buttonImageOnly:true})
-			//.next('button').text('.').button({icons:{primary:'ui-icon-calendar'},text:false});
 		});
 	</script>
 	<script type="text/javascript">
-	// $(document).ready(function(){
-		// $("#idcustomer").change(function(){
-			// var idcustomer = $("#idcustomer").val();
-			// $.ajax({
-				// url: "getcustomer.php",
-				// data: "idcustomer=" + idcustomer,
-				// dataType: 'json',
-				// cache: false,
-				// success: function(data){
-					// $("#customerproduct").html(data.customerproduct);
-					// $("#warrantyperiod").html(data.warrantyperiod);
-					// $("#warrantystartdate").html(data.warrantystartdate);
-					// $("#warrantyenddate").html(data.warrantyenddate);
-					// $("#contractperiod").html(data.contractperiod);
-					// $("#contractstartdate").html(data.contractstartdate);
-					// $("#contractenddate").html(data.contractenddate);
-				// }
-			// });
-		// });	
-	// });
-	
-	function cekData()
-	// {	if (ticketform.idcustomer.value == "")
-		// {	alert("Please choose the customer!");
-			// ticketform.idcustomer.focus();
-			// return false;
-		// }
+	function cekData(ticketform){
 		if (ticketform.reportedby.value == "")
 		{	alert("Reported By must be filled!");
 			ticketform.reportedby.focus();
@@ -141,24 +112,6 @@ Helpdesk";
 			ticketform.problemdetail.focus();
 			return false;
 		}
-		if (ticketform.telp.value == "")
-		{	alert("Telephone must be filled!");
-			ticketform.telp.focus();
-			return false;
-		}
-		if(/\D/.test(ticketform.telp.value))
-        {   alert("Telephone must be filled with numbers only!");
-			ticketform.telp.focus();
-			return false;
-        }
-		var filter = new RegExp(
-			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
-			"[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-		if (!filter.test(ticketform.email.value) && ticketform.email.value != "")
-		{	alert("Please enter a valid email address!");
-			ticketform.email.focus();
-			return false;
-		}	   
 		else
 			return true;   
 	}
@@ -167,40 +120,10 @@ Helpdesk";
 <body>	
 	<div class="breadcrumb"> >> Home >> New Ticket</div>
 	<hr/>
-	<form name="ticketform" method="post" action="" onsubmit="return cekData();">
+	<form name="ticketform" id="ticketform" method="post" action="" onsubmit="return cekData(this);">
 	<fieldset style="display: inline-block;">
 	<legend> New Ticket </legend>
 	<div class="breadcrumb">*) Field Required</div>
-	<table class="formtable">
-		<!--<tr>
-			<td width="120"> Customer* </td><td> : </td>
-			<td> <select name="idcustomer" id="idcustomer">
-				<option></option>
-			// <?php
-                // $customers = $customers->get_customers();
-                // foreach ($customers as $customerval)
-                // {
-                    // echo '<option value=' . $customerval['idcustomer'] . '>' .  $customerval['namacustomer'] . '</option>';
-                // }
-            //?>
-			</select></td>
-		</tr>
-		<tr>
-			<td> Customer Product</td><td> : </td>
-			<td><label id="customerproduct"></label> 
-			</td>
-		</tr>
-		<tr>
-			<td> Warranty Period</td><td> : </td>
-			<td> <label id="warrantystartdate"></label> until <label id="warrantyenddate"></label> (<label id="warrantyperiod"></label> Year)
-			</td>
-		</tr>
-		<tr>
-			<td> Contract Period</td><td> : </td>
-			<td> <label id="contractstartdate"></label> until <label id="contractenddate"></label> (<label id="contractperiod"></label> Month) 
-			</td>
-		</tr>
-	</table><br/>-->
 	<table class="formtable">
 		<tr>
 			<td>Ticket No:</td><td> : </td>	
@@ -256,19 +179,10 @@ Helpdesk";
 			<?php
                 $Asignees = $users->get_users();
                 foreach ($Asignees as $user) {
-                    //echo '<option value=' . $user['id'] . '>' .  $user['fullname'] . '</option>';
                     echo '<option selected value='.$user['id'].'>'.$user['fullname'].'</option>';
                 }
             ?>
 			</select> </td>
-		</tr>
-		<tr>
-			<td> Telephone </td><td> : </td>
-			<td> <input type='text' size='20' name='telp' maxlength="20"> </td>
-		</tr>
-		<tr>
-			<td> Email </td><td> : </td>
-			<td> <input type='email' size='50' name='email' maxlength="50"> </td>
 		</tr>
 		<tr>
 			<td> </td>
