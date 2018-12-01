@@ -4,6 +4,7 @@ require 'core/init.php';
 $general->logged_out_protect();
 $changeby = $_SESSION['loginid'];
 $documentedby = $_SESSION['loginid'];
+$user = $users->userdata($_SESSION['loginid']);
 if (isset($_POST['submit'])) {
     $lastticket = $tickets->get_last_ticket();
     $id = $lastticket['id'] + 1;
@@ -137,7 +138,7 @@ Helpdesk";
 		</tr>
 		<tr>
 			<td> Reported By* </td><td> : </td>
-			<td> <input type='text' size='50' name='reportedby' maxlength="50"> </td>
+			<td> <?php echo $user['fullname'];?> <input type='hidden' size='50' name='reportedby' value="<?php echo $user['fullname'];?>" maxlength="50"> </td>
 		</tr>
 		<tr>
 			<td> Urgency (SLA)*</td><td> : </td>
