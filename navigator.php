@@ -14,7 +14,9 @@ $user 		= $users->userdata($_SESSION['loginid']);
 <div id="leftmenu">
 <div id="headleftmenu">My Tickets</div>
 <ul>
-  <li><a href="myticketbyrequester.php" target="contentFrame">My Request</a></li>
+	<?php if ($user['level'] == 'User'):?>
+		<li><a href="myticketbyrequester.php" target="contentFrame">My Request</a></li>
+	<?php endif;?>
   <li><a href="myticketbyassignee.php" target="contentFrame">My Assignment</a></li>
   <li><a href="myticketbyresolver.php" target="contentFrame">My Resolution</a></li>
   <li><a href="myticketwaitforclosed.php" target="contentFrame">Waiting for Close</a></li>
