@@ -228,6 +228,20 @@ class Users
         return $query->fetchAll();
     }
 
+    public function get_user_random_by_level($level)
+    {
+        $query = $this->db->prepare('SELECT * FROM `users` WHERE `level`= ? ORDER BY RAND() LIMIT 1');
+        $query->bindValue(1, $level);
+
+        try {
+            $query->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+
+        return $query->fetch();
+    }
+
     public function get_users()
     {
         $query = $this->db->prepare('SELECT * FROM `users` ORDER BY `time` DESC');

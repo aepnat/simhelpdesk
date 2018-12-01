@@ -174,23 +174,13 @@ Helpdesk";
 			<td> <textarea name="problemdetail" rows="3" cols="38"></textarea> </td>
 		</tr>
 		<tr>
-			<td> Assign to* </td><td> : </td>
-			<td> <select name="idassignee">
-				<option> </option>
-			<?php
-                $Asignees = $users->get_users();
-                foreach ($Asignees as $user) {
-                    echo '<option selected value='.$user['id'].'>'.$user['fullname'].'</option>';
-                }
-            ?>
-			</select> </td>
-		</tr>
-		<tr>
 			<td> </td>
 			<td> </td>
 			<td> <br/>
-				<input type='submit' name='submit' value=' Submit '>  &nbsp;&nbsp;&nbsp;
-				<input type='reset' name='reset' value=' Reset '> 
+			<?php $assignee = $users->get_user_random_by_level('Admin');?>
+			<input type="hidden" name="idassignee" value="<?php echo $assignee['id'];?>"/>
+			<input type='submit' name='submit' value=' Submit '>  &nbsp;&nbsp;&nbsp;
+			<input type='reset' name='reset' value=' Reset '> 
 			</td>
 		</tr>
 	</table>
