@@ -10,24 +10,6 @@ class Tickets
         $this->db = $database;
     }
 
-    public function ticket_exists($projectid)
-    {
-        $query = $this->db->prepare('SELECT COUNT(`id`) FROM `tickets` WHERE `ticketnumber`= ?');
-        $query->bindValue(1, $projectid);
-
-        try {
-            $query->execute();
-            $rows = $query->fetchColumn();
-            if ($rows == 1) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (PDOException $e) {
-            die($e->getMessage());
-        }
-    }
-
     public function add_ticket($ticketnumber, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $documentedby, $pro)
     {
         $current = time();
