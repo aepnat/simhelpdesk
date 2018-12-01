@@ -14,7 +14,6 @@ $general->logged_out_protect();
 <div id="headleftmenu">Data Master</div>
 <ul>
   <li><a href="userlist.php" target="contentFrame">User List</a></li>
-  <li><a href="customerlist.php" target="contentFrame">Customer List</a></li>
 </ul>
 </div>
 <div id="leftmenu">
