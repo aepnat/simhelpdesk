@@ -24,33 +24,20 @@ $tickets_resolved = count($ticket3);
 	<hr/>
 	<table>
 	<tr>
-		<td><img src="images/helpdesk.jpg" alt="Helpdesk Welcome" width="273px" height="173px" align="top" title="Helpdesk Welcome"></td>
-		<td><h1 class="content">Welcome to Helpdesk System</h1>
+		<td><img src="images/helpdesk.jpg" alt="Helpdesk Welcome" width="auto" height="173px" align="top" title="Helpdesk Welcome"></td>
+		<td><h1 class="content">Selamat datang di Sistem Helpdesk</h1>
 		<ul>
 		<?php
-        echo "<li><p>Currently you have requested: $tickets_requested tickets. </p></li>";
-        echo "<li><p>Number of ticket that assigned to you: $tickets_assigned tickets.</p></li> ";
-        echo "<li><p>You have resolved $tickets_resolved tickets.</p></li>";
+		if ($user['level'] == 'User') {
+			echo "<li><p>Saat ini anda memiliki tiket: $tickets_requested tickets. </p></li>";
+		} elseif ($user['level'] == 'Admin') {
+			echo "<li><p>Jumlah tiket yang ditugaskan untuk Anda: $tickets_assigned tickets.</p></li> ";
+			echo "<li><p>Anda telah menyelesaikan $tickets_resolved tickets.</p></li>";
+		}
         ?>
 		</ol><br/>
 		</td>
 	</tr>
 	</table>
-	<h2 class="content">Helpdesk Breaking News</h2>
-	<table id="table-a">
-	<thead>
-		<tr><th width="100">Post Date</th><th>Headline News</th></tr>
-	</thead>
-	<tbody>
-	<?php 
-        $news = $hdnews->get_headline_news();
-        foreach ($news as $thenews) {
-            echo '<tr><td>'.date('d-M-Y', $thenews['newsdate']).'</td>'.
-                 '<td><a href=hdnewsread.php?id='.$thenews['id'].'>'.$thenews['title'].'</a></td></tr>';
-        }
-    ?>
-	</tbody>
-	</table>
-	<p>&nbsp;</p>
 </body>
 </html>

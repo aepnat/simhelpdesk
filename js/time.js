@@ -1,7 +1,7 @@
 function startTime()
 { 	var today=new Date();
 	var weekday=new Array(7);
-	var weekday=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+	var weekday=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
 	var monthname=new Array(12);
 	var monthname=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 	var dayname=weekday[today.getDay()];

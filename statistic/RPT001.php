@@ -91,30 +91,6 @@ $general->logged_out_protect();
 	<p><input type='submit' value='Go'></p>
 	
 	</form>
-	<table id="table-a">
-		<thead>
-		<tr align="center">
-			<th width="203" rowspan="2">Technical Support</th>
-			<th colspan="3">Product Category</th>
-		</tr>
-			<tr align="center">
-			<th width="58">Data</th>
-			<th width="59">Voice</th>
-			<th width="59">Data and Voice</th>
-		</tr>
-		</thead>
-		<tbody>
-			<?php 
-            $news = $hdnews->get_headline_news();
-            foreach ($news as $thenews) {
-                echo '<tr><td>Budi</td>'.
-                     '<td>3</td>'.
-                     '<td>5</td>',
-                     '<td>7</td></tr>';
-            }
-            ?>
-		</tbody>
-	</table>
 	
 	<p>&nbsp;</p>
 </body>

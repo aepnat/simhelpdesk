@@ -14,7 +14,6 @@ try {
     $general = new General();
     $users = new Users($db);
     $tickets = new Tickets($db);
-    $hdnews = new HDNews($db);
     $slas = new SLA($db);
     $emails = new Emails($db);
 } catch (Exception $e) {
