@@ -191,13 +191,11 @@ if (isset($_POST['submit'])) {
 			<td> Status* </td><td> : </td>
 			<td> <input type="hidden" name="oldticketstatus" value="<?php echo $ticket['ticketstatus']; ?>"> 
 			<select name="ticketstatus">
-				<?php
-                    echo '<option value='.$ticket['ticketstatus'].' selected="selected">'.$ticket['ticketstatus'].'</option>';
-                ?>
-				<option value="Assigned"> Assigned </option>
-				<option value="Resolved"> Resolved </option>
-				<option value="Pending"> Pending </option>
-				<option value="Closed"> Closed </option>
+				<option value="Assigned" <?php echo ($ticket['ticketstatus'] == 'Assigned') ? 'selected="selected"' : '';?>>Assigned</option>
+				<option value="Process" <?php echo ($ticket['ticketstatus'] == 'Process') ? 'selected="selected"' : '';?>>Process</option>
+				<option value="Resolved" <?php echo ($ticket['ticketstatus'] == 'Resolved') ? 'selected="selected"' : '';?>>Resolved</option>
+				<option value="Pending" <?php echo ($ticket['ticketstatus'] == 'Pending') ? 'selected="selected"' : '';?>>Pending</option>
+				<option value="Closed" <?php echo ($ticket['ticketstatus'] == 'Closed') ? 'selected="selected"' : '';?>>Closed</option>
 			</select> 
 			</td>
 		</tr>
