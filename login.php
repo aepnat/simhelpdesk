@@ -28,14 +28,14 @@ if (empty($_POST) === false) {
 <!DOCTYPE html>
 <html>
 <head>
-<title>Login Helpdesk System</title>
+<title>LOGIN HELPDESK SYSTEM PT.WAHANA KALYANAMITRA MAHARDIKA</title>
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body onload="document.login.username.focus();">
 <br/><br/>
-<h1 class="loginform">Login Helpdesk System</h1>
+<h1 class="loginform">LOGIN HELPDESK SYSTEM PT.WAHANA KALYANAMITRA MAHARDIKA</h1>
 <div class="loginform" align="center">
 	<table class="loginform">
 	<tr><td>
