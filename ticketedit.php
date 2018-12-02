@@ -171,14 +171,6 @@ if (isset($_POST['submit'])) {
 			<td> Problem Detail* </td><td> : </td>
 			<td> <textarea name="problemdetail" rows="3" cols="38"><?php echo $ticket['problemdetail']; ?></textarea> </td>
 		</tr>
-		<tr>
-			<td> Telephone </td><td> : </td>
-			<td> <input type='text' size='20' name='telp' maxlength="20" value='<?php echo $ticket['telp']; ?>'> </td>
-		</tr>
-		<tr>
-			<td> Email </td><td> : </td>
-			<td> <input type='text' size='50' name='email' maxlength="50" value='<?php echo $ticket['email']; ?>'> </td>
-		</tr>
 	</table>
 	<br/>
 	<table class="formtable">
