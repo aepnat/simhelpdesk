@@ -15,7 +15,7 @@ $fullname = ucwords(strtolower($user['fullname']));
 <body bgcolor="#bb2a26" onload="startTime();">	
 <table class="header">
 <tr>
-	<td width="55px"><img src="images/company-logo.png" alt="Company-Logo" width="55px" height="30px" align="middle"></td>
+	<td width="70px"><img src="images/logo-helpdesk.png" alt="Company-Logo" width="70px" height="auto" align="middle"></td>
 	<td width="200px"><strong>HELPDESK SYSTEM</strong></td>
 	<td align="right"><span id="clocktime"></span><span id="welcome"><?php echo " :: Selamat datang $fullname &nbsp; &nbsp;"; ?> </span></td>
 </tr>

@@ -39,7 +39,7 @@ if (empty($_POST) === false) {
 <div class="loginform" align="center">
 	<table class="loginform">
 	<tr><td>
-		<img src="images/logo.png" alt="Company-Logo" align="middle">
+		<img src="images/logo-helpdesk.png" alt="Company-Logo" align="middle">
 	</td>
 	<td>
 		<form name="login" method="post">
