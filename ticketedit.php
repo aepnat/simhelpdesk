@@ -21,6 +21,9 @@ if (isset($_POST['submit'])) {
     $type = $_POST['pro'];
     $ticketstatus = $_POST['ticketstatus'];
     $resolution = $_POST['resolution'];
+    $comment = $_POST['comment'];
+    $processby = $_POST['processby'];
+    $processdate = $_POST['processdate'];
     $pendingby = $_POST['pendingby'];
     $pendingdate = $_POST['pendingdate'];
     $resolvedby = $_POST['resolvedby'];
@@ -28,7 +31,12 @@ if (isset($_POST['submit'])) {
     $closedby = $_POST['closedby'];
     $closeddate = $_POST['closeddate'];
     $changes = 'Re-assigned the ticket.';
-    if ($ticketstatus == 'Pending') {
+	if ($ticketstatus == 'Process') {
+		$processby = $user['username'];
+		$processdate = strtotime(now);
+		$changes = 'Change Status to Process';
+	}
+	if ($ticketstatus == 'Pending') {
         $pendingby = $user['username'];
         $pendingdate = strtotime(now);
         $changes = 'Change Status to Pending.';
@@ -43,8 +51,8 @@ if (isset($_POST['submit'])) {
         $closeddate = strtotime(now);
         $changes = 'Change Status to Closed.';
     }
-    $tickets->update_ticket($id, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $assigneddate, $pendingby, $pendingdate, $resolution, $resolvedby, $resolveddate, $closedby, $closeddate);
-    $tickets->log_tickets($id, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $assigneddate, $pendingby, $pendingdate, $resolution, $resolvedby, $resolveddate, $closedby, $closeddate, $changes, $changeby);
+    $tickets->update_ticket($id, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $assigneddate, $pendingby, $pendingdate, $resolution, $resolvedby, $resolveddate, $closedby, $closeddate, $processby, $processdate, $comment);
+    $tickets->log_tickets($id, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $assigneddate, $pendingby, $pendingdate, $resolution, $resolvedby, $resolveddate, $closedby, $closeddate, $changes, $changeby, $processby, $processdate, $comment);
     if ($user['level'] == 'Admin') {
         header('Location: ticketlist.php');
     } else {
@@ -57,6 +65,7 @@ if (isset($_POST['submit'])) {
 <head>
 	<title>Update Ticket</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<link rel="stylesheet" href="css/style.css" />
 	<style type="text/css">
 		body{font-size:12px;background-image:url('images/corner.jpg');background-repeat:no-repeat;background-attachment:fixed;font-family: Arial, Helvetica, sans-serif;}
 		.breadcrumb{font-size:12px;color:#0000A0;}
@@ -92,14 +101,6 @@ if (isset($_POST['submit'])) {
 		if (ticketform.reportedby.value == "")
 		{	alert("Reported By must be filled!");
 			ticketform.reportedby.focus();
-			return false;
-		}
-		var filter = new RegExp(
-			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
-			"[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-		if (!filter.test(ticketform.email.value) && ticketform.email.value != "")
-		{	alert("Please enter a valid email address!");
-			ticketform.email.focus();
 			return false;
 		}
 		if (ticketform.ticketstatus.value == "Closed")
@@ -201,7 +202,11 @@ if (isset($_POST['submit'])) {
 		</tr>
 		<tr valign="top">
 			<td> Resolution* </td><td> : </td>
-			<td> <textarea name="resolution" rows="3" cols="38"><?php echo $ticket['resolution']; ?></textarea> </td>
+			<td> <textarea name="resolution" rows="3" cols="38" <?php echo ($user['level'] == 'User') ? 'readonly="readonly"' : '';?>><?php echo $ticket['resolution']; ?></textarea> </td>
+		</tr>
+		<tr valign="top">
+			<td> Comment* </td><td> : </td>
+			<td> <textarea name="comment" rows="3" cols="38" <?php echo ($user['level'] != 'User') ? 'readonly="readonly"' : '';?>><?php echo $ticket['comment']; ?></textarea> </td>
 		</tr>
 		<tr>
 			<td> </td><td> </td>

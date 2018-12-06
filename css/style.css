@@ -45,3 +45,4 @@ div.breadcrumb{font-size:12px;color:#0000A0;}
 #table-a tr:hover td {background:#d0dafd;color:#333399;}
 #table-a a {text-decoration:none;}
 #table-a a:hover {text-decoration:underline;}
+textarea:read-only{background: #f5f5f5}

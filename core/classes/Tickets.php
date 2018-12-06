@@ -36,9 +36,9 @@ class Tickets
         }
     }
 
-    public function update_ticket($id, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $assigneddate, $pendingby, $pendingdate, $resolution, $resolvedby, $resolveddate, $closedby, $closeddate)
+    public function update_ticket($id, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $assigneddate, $pendingby, $pendingdate, $resolution, $resolvedby, $resolveddate, $closedby, $closeddate, $processby, $processdate, $comment)
     {
-        $querystring = 'UPDATE `tickets` SET `sla` = ? , `reporteddate` = ? , `reportedby` = ? , `telp` = ? ,`email` = ? , `problemsummary` = ? , `problemdetail` = ? ,`ticketstatus` = ?, `assignee` = ? , `assigneddate` = ?, `pendingby` = ?,`pendingdate` = ?, `resolution` = ? ,`resolvedby` = ?,`resolveddate` = ?,`closedby` = ?,`closeddate` = ? WHERE `id` = ?';
+        $querystring = 'UPDATE `tickets` SET `sla` = ? , `reporteddate` = ? , `reportedby` = ? , `telp` = ? ,`email` = ? , `problemsummary` = ? , `problemdetail` = ? ,`ticketstatus` = ?, `assignee` = ? , `assigneddate` = ?, `pendingby` = ?,`pendingdate` = ?, `resolution` = ? ,`resolvedby` = ?,`resolveddate` = ?,`closedby` = ?,`closeddate` = ?, `processby` = ?, `processdate` = ?, `comment` = ? WHERE `id` = ?';
         $query = $this->db->prepare($querystring);
         $query->bindValue(1, $sla);
         $query->bindValue(2, $reporteddate);
@@ -57,7 +57,10 @@ class Tickets
         $query->bindValue(15, $resolveddate);
         $query->bindValue(16, $closedby);
         $query->bindValue(17, $closeddate);
-        $query->bindValue(18, $id);
+        $query->bindValue(18, $processby);
+        $query->bindValue(19, $processdate);
+        $query->bindValue(20, $comment);
+        $query->bindValue(21, $id);
 
         try {
             $query->execute();
@@ -286,10 +289,10 @@ class Tickets
             }
         }*/
 
-    public function log_tickets($id, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $assigneddate, $pendingby, $pendingdate, $resolution, $resolvedby, $resolveddate, $closedby, $closeddate, $changes, $changeby)
+    public function log_tickets($id, $sla, $reporteddate, $reportedby, $telp, $email, $problemsummary, $problemdetail, $ticketstatus, $assignee, $assigneddate, $pendingby, $pendingdate, $resolution, $resolvedby, $resolveddate, $closedby, $closeddate, $changes, $changeby, $processby, $processdate, $comment)
     {
         $changedate = time();
-        $querystring = 'INSERT INTO `log_tickets` (`id`,`sla`,`reporteddate`, `reportedby`, `telp`, `email`, `problemsummary`,`problemdetail`,`ticketstatus`,`assignee`,`assigneddate`,`pendingby`,`pendingdate`,`resolution`,`resolvedby`,`resolveddate`,`closedby`,`closeddate`,`changes`,`changeby`,`changedate`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $querystring = 'INSERT INTO `log_tickets` (`id`,`sla`,`reporteddate`, `reportedby`, `telp`, `email`, `problemsummary`,`problemdetail`,`ticketstatus`,`assignee`,`assigneddate`,`pendingby`,`pendingdate`,`resolution`,`resolvedby`,`resolveddate`,`closedby`,`closeddate`,`changes`,`changeby`,`changedate`,`processby`,`processdate`,`comment`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $query = $this->db->prepare($querystring);
         $query->bindValue(1, $id);
         $query->bindValue(2, $sla);
@@ -312,6 +315,9 @@ class Tickets
         $query->bindValue(19, $changes);
         $query->bindValue(20, $changeby);
         $query->bindValue(21, $changedate);
+        $query->bindValue(22, $processby);
+        $query->bindValue(23, $processdate);
+        $query->bindValue(24, $comment);
 
         try {
             $query->execute();
