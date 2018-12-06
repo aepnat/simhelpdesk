@@ -16,7 +16,7 @@ $tickets_resolved = count($ticket3);
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<style type="text/css">
-		body{margin:10px;background-image:url('images/corner.jpg');background-repeat:no-repeat;background-attachment:fixed;}
+		body{margin:10px;}
 	</style>
 </head>
 <body>

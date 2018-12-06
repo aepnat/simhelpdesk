@@ -21,8 +21,8 @@ if (isset($_POST['submit'])) {
 <head>
 	<title>Change Password</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<style type="text/css">
-		body{background-image:url('images/corner.jpg');background-repeat:no-repeat;background-attachment:fixed;font-family: Arial, Helvetica, sans-serif;}
 		.breadcrumb{font-size:12px;color:#0000A0;}
 		.errormsg {font-size:10pt;color:#ff0000;text-align:left;}
 		.form {margin:0; padding:0; font-size:14px; }

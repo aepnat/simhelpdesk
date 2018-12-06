@@ -10,7 +10,7 @@ $user = $users->userdata($_SESSION['loginid']);
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 	<link rel=stylesheet type="text/css" href="css/style.css">
 </head>
-<body bgcolor="#bb2a26">
+<body bgcolor="#FFF">
 <div id="leftmenu">
 <div id="headleftmenu">My Tickets</div>
 <ul>
@@ -25,16 +25,5 @@ $user = $users->userdata($_SESSION['loginid']);
 	<?php endif;?>
 </ul>
 </div>
-<?php
-    if ($user['level'] == 'Manager' || $user['level'] == 'Admin') {
-        echo '<div id="leftmenu">
-				<div id="headleftmenu">Helpdesk Statistic</div>
-					<ul>
-					<li><a href="pivot/hdpivot.php" target="contentFrame">Pivot Table</a></li>
-					<li><a href="statistic/chart.php" target="contentFrame">SLA Chart</a></li>
-					</ul>
-			 </div>';
-    }
-?>
 </body>
 </html>

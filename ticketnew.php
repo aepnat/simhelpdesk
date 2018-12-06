@@ -40,8 +40,8 @@ if (isset($_POST['submit'])) {
 <head>
 	<title>New Ticket</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<style type="text/css">
-		body{font-size:12px;background-image:url('images/corner.jpg');background-repeat:no-repeat;background-attachment:fixed;font-family: Arial, Helvetica, sans-serif;}
 		.breadcrumb{font-size:12px;color:#0000A0;}
 		.formtable {text-align:left; font-size:12px;color:#000000; background-color:#f0f0f0;padding:10px;width:600px; }
 		.errormsg {font-size:10pt;color:#ff0000;text-align:left;}

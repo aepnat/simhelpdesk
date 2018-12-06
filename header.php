@@ -12,7 +12,7 @@ $fullname = ucwords(strtolower($user['fullname']));
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script type="text/javascript" src="js/time.js"></script>
 </head>
-<body bgcolor="#bb2a26" onload="startTime();">	
+<body bgcolor="#E64759" onload="startTime();">	
 <table class="header">
 <tr>
 	<td width="70px"><img src="images/logo-helpdesk.png" alt="Company-Logo" width="70px" height="auto" align="middle"></td>
