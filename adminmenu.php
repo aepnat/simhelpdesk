@@ -24,6 +24,12 @@ $general->logged_out_protect();
 </ul>
 </div>
 <div id="leftmenu">
+<div id="headleftmenu">Laporan</div>
+<ul>
+  <li><a href="report_all_tickets.php" target="contentFrame">Laporan Semua Tickets</a></li>
+  </ul>
+</div>
+<div id="leftmenu">
 <div id="headleftmenu">System</div>
 <ul>
   <li><a href="userlog.php" target="contentFrame">User Log</a></li>
