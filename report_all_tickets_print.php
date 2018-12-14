@@ -10,7 +10,7 @@ if ($user['level'] == 'Admin' || $user['level'] == 'Manager') {
 if ($akses = false) {
     exit("You don't have permission to access this page!");
 }
-$ticket_list = $tickets->get_tickets();
+$ticket_list = $tickets->get_tickets_by_date($_GET['periode_awal'], $_GET['periode_akhir']);
 $tickets_count = count($ticket_list);
 $currenttime = time();
 ?>

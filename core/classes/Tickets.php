@@ -206,6 +206,23 @@ class Tickets
         return $query->fetchAll();
     }
 
+    public function get_tickets_by_date($start_date, $end_date)
+    {
+        $start_date = strtotime($start_date);
+        $end_date = strtotime($end_date);
+        $query = $this->db->prepare('SELECT * FROM `tickets` WHERE `documenteddate` >= ? AND `documenteddate` <= ? ORDER BY `ticketnumber` DESC');
+        $query->bindValue(1, $start_date);
+        $query->bindValue(2, $end_date);
+
+        try {
+            $query->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+
+        return $query->fetchAll();
+    }
+
     public function search_closed_ticket($fromperiod, $toperiod)
     {
         $query = $this->db->prepare("SELECT * FROM `tickets` WHERE `documenteddate` >= ? AND `documenteddate` <= ? AND `ticketstatus` = 'Closed' ORDER BY `documenteddate` DESC");
