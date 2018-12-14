@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 	<link href="css/styleform.css" rel="stylesheet" type="text/css" />
 	<style type="text/css">
-		body{background-image:url('images/corner.jpg');background-repeat:no-repeat;background-attachment:fixed;font-family: Arial, Helvetica, sans-serif;}
+		body{font-family: Arial, Helvetica, sans-serif;}
 	</style>
 	<script type="text/javascript">
 	function cekData()

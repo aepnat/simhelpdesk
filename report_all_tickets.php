@@ -15,7 +15,7 @@ $logs = $users->get_users_log();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Report All Tickets</title>
 	<style type="text/css">
-		body{background-image:url('images/corner.jpg');background-repeat:no-repeat;background-attachment:fixed;font-family: Arial, Helvetica, sans-serif;}
+		body{font-family: Arial, Helvetica, sans-serif;}
 		.breadcrumb{font-size:12px;color:#0000A0;}
 		.formtable {text-align:left; font-size:12px;color:#000000; background-color:#f0f0f0;padding:10px;width:600px; }
 		.errormsg {font-size:10pt;color:#ff0000;text-align:left;}
